@@ -1,0 +1,33 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "my.edu.um.fsktm.cra.amazonreviewhousekeeper"
+    },
+    "jhipsterVersion": "4.14.3",
+    "baseName": "amazonreviewhousekeeper",
+    "packageName": "my.edu.um.fsktm.cra.amazonreviewhousekeeper",
+    "packageFolder": "my/edu/um/fsktm/cra/amazonreviewhousekeeper",
+    "serverPort": "8882",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "couchbase",
+    "devDatabaseType": "couchbase",
+    "prodDatabaseType": "couchbase",
+    "searchEngine": false,
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "6d740ac798d0dcca1b8fdc1bd7d7bb8868130e5e",
+    "enableTranslation": false,
+    "applicationType": "microservice",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "clientPackageManager": "yarn",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

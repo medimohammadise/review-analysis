@@ -16,17 +16,19 @@ public class ReviewServiceImpl implements ReviewService{
 		this.amazonReviewCollector=amazonReviewCollector;
 	}
 	@Override
-	public void saveReview() {
-		List<Review> reviews= amazonReviewCollector.extractLatestReviews("https://www.amazon.com/product-reviews/B00UGBWR0E");
+	public void saveReview(String productId) {
+		List<Review> reviews= amazonReviewCollector.extractLatestReviews("https://www.amazon.com/product-reviews/",productId);
 		
 		reviews.forEach(c->{
 				Review existingReview=null;
 				try {
-				 existingReview=reviewRepository.findByTitleAndReviewDateAndCustomerProfileId(c.getTitle().replaceAll("\"", "\\\"").replaceAll("'", "\'"), c.getReviewDate(), c.getCustomerProfileId());
+					String title=c.getTitle().replaceAll("\"", "\\\\\"");
+					c.setTitle(title);
+				 existingReview=reviewRepository.findByTitleAndReviewDateAndCustomerProfileId(c.getTitle(),c.getReviewDate(), c.getCustomerProfileId());
 				}
 				catch(Exception e)
 				{
-					System.out.println("Exception occured for "+ c.getTitle().replaceAll("\"", "\\\"").replaceAll("'", "\'")+" "+ c.getReviewDate()+" "+ c.getCustomerProfileId());
+					System.out.println("Exception occured for "+ c.getTitle()+" "+ c.getReviewDate()+" "+ c.getCustomerProfileId());
 					System.out.println(e.getMessage());
 				}
 					

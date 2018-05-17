@@ -16,18 +16,23 @@ import com.couchbase.client.java.repository.annotation.Field;
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public Review(String customerProfileId,String title,String author,String reviewText,LocalDate reviewDate) {
+    public Review(String productId,String customerProfileId,String title,String author,String reviewText,LocalDate reviewDate) {
     	  this.id=UUID.randomUUID().toString();
     	  this.customerProfileId=customerProfileId;
     	  this.title=title;
     	  this.author=author;
     	  this.reviewText=reviewText;
     	  this.reviewDate=reviewDate;
+    	  this.productId=productId;
     }
     @Id
     @Field
     private String id;
+    
 
+    @Field
+    private String productId;
+    
     @Field
     private String title;
     
@@ -95,6 +100,14 @@ public class Review implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
   

@@ -46,10 +46,12 @@ spring:
             bindings:
                 output:
                     destination: topic-jhipster
+                newreview-subChannel:
+                  destination: new-reviews        
     couchbase:
         bootstrap-hosts: localhost
         bucket:
-            name: amazonreviewcollector
+            name: review
             password: pooya123
     mail:
         host: localhost

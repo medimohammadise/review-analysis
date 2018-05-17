@@ -33,12 +33,12 @@ public class AmazonReviewCollector {
 
 	// Find all URLs that start with "http://www.mkyong.com/page/" and add them to
 	// the HashSet
-	public List<Review> extractLatestReviews(String URL) {
+	public List<Review> extractLatestReviews(String URL,String productID) {
 		Integer pageSize = 0;
 		Document document = null;
 		Pattern pattern = Pattern.compile("(\\d+)");
 		try {
-			document = Jsoup.connect(URL).get();
+			document = Jsoup.connect(URL+"/"+productID).get();
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
@@ -47,7 +47,7 @@ public class AmazonReviewCollector {
 		IntStream.range(1, pageSize).forEach(pageNo -> {
 			Document pageDocument = null;
 			try {
-				pageDocument = Jsoup.connect(URL + "?pageNumber=" + pageNo).get();
+				pageDocument = Jsoup.connect(URL+"/"+productID + "?pageNumber=" + pageNo).get();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,6 +68,7 @@ public class AmazonReviewCollector {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
 
 				reviews.add(new Review(
+						productID,
 						c.select("div[id^=customer_review]").attr("id").substring("customer_review-".length()),
 						c.select("div[id^=customer_review]").select("a[data-hook=review-title]").html(),
 						c.select("div[id^=customer_review]").select("a[data-hook=review-author]").html(),

@@ -15,7 +15,7 @@ public class ReviewResource {
 	}
 	 @GetMapping("/review")
 	public void saveReview() {
-		reviewService.saveReview();
+		reviewService.saveReview("");
 	}
 
 }
