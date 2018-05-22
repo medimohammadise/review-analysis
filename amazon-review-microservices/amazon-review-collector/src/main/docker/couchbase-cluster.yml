@@ -1,6 +1,6 @@
 version: '2'
 services:
-    jhipster5-couchbase:
+    amazonreviewcollector-couchbase:
         build:
             context: .
             dockerfile: couchbase/Couchbase.Dockerfile
@@ -11,13 +11,13 @@ services:
             - 11210:11210
         environment:
             - TYPE=MASTER
-            - BUCKET=jhipster5
-    jhipster5-couchbase-node:
+            - BUCKET=amazonreviewcollector
+    amazonreviewcollector-couchbase-node:
         build:
             context: .
             dockerfile: couchbase/Couchbase.Dockerfile
         environment:
             - TYPE=WORKER
-            - BUCKET=jhipster5
-            - COUCHBASE_MASTER=jhipster5-couchbase
+            - BUCKET=amazonreviewcollector
+            - COUCHBASE_MASTER=amazonreviewcollector-couchbase
             - AUTO_REBALANCE=false

@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mycompany.myapp</groupId>
-    <artifactId>jhipster-5</artifactId>
+    <groupId>my.edu.um.fsktm.cra.amazonreviewcollector</groupId>
+    <artifactId>amazonreviewcollector</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Jhipster 5</name>
+    <name>Amazonreviewcollector</name>
 
     <repositories>
         <!-- TODO Remove snapshot repositories after final Spring Boot 2 release -->
@@ -570,7 +570,7 @@
                 </executions>
                 -->
                 <configuration>
-                    <repository>jhipster5</repository>
+                    <repository>amazonreviewcollector</repository>
                     <tag>latest</tag>
                     <contextDirectory>${project.build.directory}</contextDirectory>
                 </configuration>
@@ -591,8 +591,8 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/swagger/api.yml</inputSpec>
                             <language>spring</language>
-                            <apiPackage>com.mycompany.myapp.web.api</apiPackage>
-                            <modelPackage>com.mycompany.myapp.web.api.model</modelPackage>
+                            <apiPackage>my.edu.um.fsktm.cra.amazonreviewcollector.web.api</apiPackage>
+                            <modelPackage>my.edu.um.fsktm.cra.amazonreviewcollector.web.api.model</modelPackage>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>

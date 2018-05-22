@@ -1,7 +1,7 @@
 {
-  "name": "jhipster-5",
+  "name": "amazonreviewcollector",
   "version": "0.0.0",
-  "description": "Description for jhipster5",
+  "description": "Description for amazonreviewcollector",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

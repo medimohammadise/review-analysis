@@ -1,11 +1,10 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.config;
 
 import io.github.jhipster.config.JHipsterConstants;
-import my.edu.um.fsktm.cra.amazonreviewcollector.repository.CustomN1qlCouchbaseRepository;
 
 import com.couchbase.client.java.Bucket;
 import com.github.couchmove.Couchmove;
-
+import my.edu.um.fsktm.cra.amazonreviewcollector.repository.CustomN1qlCouchbaseRepository;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +35,7 @@ import java.util.List;
 
 @Configuration
 @Profile("!" + JHipsterConstants.SPRING_PROFILE_CLOUD)
-@EnableCouchbaseRepositories(repositoryBaseClass = CustomN1qlCouchbaseRepository.class, basePackages = "com.mycompany.myapp.repository")
+@EnableCouchbaseRepositories(repositoryBaseClass = CustomN1qlCouchbaseRepository.class, basePackages = "my.edu.um.fsktm.cra.amazonreviewcollector.repository")
 @Import(value = CouchbaseAutoConfiguration.class)
 @EnableCouchbaseAuditing(auditorAwareRef = "springSecurityAuditorAware")
 public class DatabaseConfiguration {

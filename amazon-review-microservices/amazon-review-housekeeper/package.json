@@ -1,7 +1,7 @@
 {
-  "name": "reviewhistory",
+  "name": "amazonreviewhousekeeper",
   "version": "0.0.0",
-  "description": "Description for reviewhistory",
+  "description": "Description for amazonreviewhousekeeper",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

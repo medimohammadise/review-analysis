@@ -1,6 +1,6 @@
 version: '2'
 services:
-    reviewhistory-couchbase:
+    amazonreviewhousekeeper-couchbase:
         build:
             context: .
             dockerfile: couchbase/Couchbase.Dockerfile
@@ -10,6 +10,6 @@ services:
             - 8093:8093
             - 11210:11210
         environment:
-            - BUCKET=reviewhistory
+            - BUCKET=amazonreviewhousekeeper
 #        volumes:
-#            - ~/volumes/jhipster/reviewhistory/couchbase/:/opt/couchbase/var
+#            - ~/volumes/jhipster/amazonreviewhousekeeper/couchbase/:/opt/couchbase/var

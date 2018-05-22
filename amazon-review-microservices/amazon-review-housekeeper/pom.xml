@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>my.edu.um.fsktm.cra.amazonreviewhousekeeper</groupId>
-    <artifactId>reviewhistory</artifactId>
+    <artifactId>amazonreviewhousekeeper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Reviewhistory</name>
+    <name>Amazonreviewhousekeeper</name>
 
     <repositories>
         <!-- TODO Remove snapshot repositories after final Spring Boot 2 release -->
@@ -315,7 +315,6 @@
         <dependency>
 	   		 <groupId>org.springframework.cloud</groupId>
 	   		 <artifactId>spring-cloud-stream-binder-kafka-streams</artifactId>
-	   		<version>2.0.0.RELEASE</version>
 		</dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -561,7 +560,7 @@
                 </executions>
                 -->
                 <configuration>
-                    <repository>reviewhistory</repository>
+                    <repository>amazonreviewhousekeeper</repository>
                     <tag>latest</tag>
                     <contextDirectory>${project.build.directory}</contextDirectory>
                 </configuration>

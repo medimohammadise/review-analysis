@@ -1,11 +1,11 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.security;
 
+import my.edu.um.fsktm.cra.amazonreviewcollector.config.Constants;
+
 import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
-
-import my.edu.um.fsktm.cra.amazonreviewcollector.config.Constants;
 
 /**
  * Implementation of AuditorAware based on Spring Security.

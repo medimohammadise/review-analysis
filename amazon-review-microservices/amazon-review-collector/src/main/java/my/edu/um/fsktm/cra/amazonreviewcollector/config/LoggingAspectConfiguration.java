@@ -1,7 +1,8 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.config;
 
+import my.edu.um.fsktm.cra.amazonreviewcollector.aop.logging.LoggingAspect;
+
 import io.github.jhipster.config.JHipsterConstants;
-import my.edu.um.fsktm.cra.amazonreviewcollector.logging.LoggingAspect;
 
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;

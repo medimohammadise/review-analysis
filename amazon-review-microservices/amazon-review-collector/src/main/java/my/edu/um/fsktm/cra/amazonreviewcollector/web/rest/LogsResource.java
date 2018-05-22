@@ -1,9 +1,9 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.web.rest;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.LoggerContext;
 import my.edu.um.fsktm.cra.amazonreviewcollector.web.rest.vm.LoggerVM;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.LoggerContext;
 import com.codahale.metrics.annotation.Timed;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

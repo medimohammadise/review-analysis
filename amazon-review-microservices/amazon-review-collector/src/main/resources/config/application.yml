@@ -24,8 +24,8 @@ eureka:
         instance-info-replication-interval-seconds: 10
         registry-fetch-interval-seconds: 10
     instance:
-        appname: jhipster5
-        instanceId: jhipster5:${spring.application.instance-id:${random.value}}
+        appname: amazonreviewcollector
+        instanceId: amazonreviewcollector:${spring.application.instance-id:${random.value}}
         lease-renewal-interval-in-seconds: 5
         lease-expiration-duration-in-seconds: 10
         status-page-url-path: ${management.endpoints.web.base-path}/info
@@ -81,21 +81,7 @@ management:
 
 spring:
     application:
-        name: jhipster5
-    cloud:
-        stream:
-            kafka:
-             streams:
-               binder:
-                configuration:
-                  commit:
-                    interval:
-                      mms: 1000 
-                  default:
-                    key:
-                     serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                    value:
-                     serde: org.apache.kafka.common.serialization.Serdes$StringSerde         
+        name: amazonreviewcollector
     messages:
         basename: i18n/messages
     mvc:
@@ -135,11 +121,11 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: jhipster5@localhost
+        from: amazonreviewcollector@localhost
     swagger:
         default-include-pattern: /api/.*
-        title: jhipster5 API
-        description: jhipster5 API documentation
+        title: amazonreviewcollector API
+        description: amazonreviewcollector API documentation
         version: 0.0.1
         terms-of-service-url:
         contact-name:

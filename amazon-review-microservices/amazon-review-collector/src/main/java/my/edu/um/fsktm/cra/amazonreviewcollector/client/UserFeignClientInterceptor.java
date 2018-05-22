@@ -1,9 +1,8 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.client;
 
+import my.edu.um.fsktm.cra.amazonreviewcollector.security.SecurityUtils;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import my.edu.um.fsktm.cra.amazonreviewcollector.security.SecurityUtils;
-
 import org.springframework.stereotype.Component;
 
 @Component

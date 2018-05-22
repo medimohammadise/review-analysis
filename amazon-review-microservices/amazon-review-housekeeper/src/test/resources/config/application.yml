@@ -17,12 +17,12 @@ eureka:
     client:
         enabled: false
     instance:
-        appname: reviewhistory
-        instanceId: reviewhistory:${spring.application.instance-id:${random.value}}
+        appname: amazonreviewhousekeeper
+        instanceId: amazonreviewhousekeeper:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: reviewhistory
+        name: amazonreviewhousekeeper
     cache:
         type: simple
     cloud:

@@ -17,12 +17,12 @@ eureka:
     client:
         enabled: false
     instance:
-        appname: jhipster5
-        instanceId: jhipster5:${spring.application.instance-id:${random.value}}
+        appname: amazonreviewcollector
+        instanceId: amazonreviewcollector:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: jhipster5
+        name: amazonreviewcollector
     cache:
         type: simple
     cloud:

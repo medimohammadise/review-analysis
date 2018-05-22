@@ -4,7 +4,7 @@
       "packageName": "my.edu.um.fsktm.cra.amazonreviewhousekeeper"
     },
     "jhipsterVersion": "5.0.0-beta.1",
-    "baseName": "reviewhistory",
+    "baseName": "amazonreviewhousekeeper",
     "packageName": "my.edu.um.fsktm.cra.amazonreviewhousekeeper",
     "packageFolder": "my/edu/um/fsktm/cra/amazonreviewhousekeeper",
     "serverPort": "8881",

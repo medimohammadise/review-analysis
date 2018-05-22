@@ -1,6 +1,6 @@
 version: '2'
 services:
-    reviewhistory-couchbase:
+    amazonreviewhousekeeper-couchbase:
         build:
             context: .
             dockerfile: couchbase/Couchbase.Dockerfile
@@ -11,13 +11,13 @@ services:
             - 11210:11210
         environment:
             - TYPE=MASTER
-            - BUCKET=reviewhistory
-    reviewhistory-couchbase-node:
+            - BUCKET=amazonreviewhousekeeper
+    amazonreviewhousekeeper-couchbase-node:
         build:
             context: .
             dockerfile: couchbase/Couchbase.Dockerfile
         environment:
             - TYPE=WORKER
-            - BUCKET=reviewhistory
-            - COUCHBASE_MASTER=reviewhistory-couchbase
+            - BUCKET=amazonreviewhousekeeper
+            - COUCHBASE_MASTER=amazonreviewhousekeeper-couchbase
             - AUTO_REBALANCE=false

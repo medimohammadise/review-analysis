@@ -4,7 +4,7 @@
       "packageName": "my.edu.um.fsktm.cra.amazonreviewcollector"
     },
     "jhipsterVersion": "5.0.0-beta.1",
-    "baseName": "amazon-review-collector",
+    "baseName": "amazonreviewcollector",
     "packageName": "my.edu.um.fsktm.cra.amazonreviewcollector",
     "packageFolder": "my/edu/um/fsktm/cra/amazonreviewcollector",
     "serverPort": "8882",

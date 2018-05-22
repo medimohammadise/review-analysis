@@ -1,8 +1,9 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector;
 
-import io.github.jhipster.config.JHipsterConstants;
 import my.edu.um.fsktm.cra.amazonreviewcollector.config.ApplicationProperties;
 import my.edu.um.fsktm.cra.amazonreviewcollector.config.DefaultProfileUtil;
+
+import io.github.jhipster.config.JHipsterConstants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class AmazonreviewcollectorApp {
     }
 
     /**
-     * Initializes jhipster5.
+     * Initializes amazonreviewcollector.
      * <p>
      * Spring profiles can be configured with a program arguments --spring.profiles.active=your-active-profile
      * <p>

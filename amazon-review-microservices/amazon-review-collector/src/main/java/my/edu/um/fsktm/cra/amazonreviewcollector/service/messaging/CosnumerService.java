@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.ReviewService;
 
-
-//@EnableBinding(ConsumerChannel.class)
+@Service
 public class CosnumerService {
 	 ReviewService reviewService;
 	 private final Logger log = LoggerFactory.getLogger(getClass());
