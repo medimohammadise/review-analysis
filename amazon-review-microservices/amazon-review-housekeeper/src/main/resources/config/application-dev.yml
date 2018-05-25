@@ -54,8 +54,8 @@ spring:
     couchbase:
         bootstrap-hosts: localhost
         bucket:
-            name: reviewhistory
-            password: pooya123
+            name: review-history
+            password: password
     mail:
         host: localhost
         port: 25

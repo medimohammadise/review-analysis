@@ -48,14 +48,14 @@ spring:
                     destination: topic-jhipster
                 newreview-subChannel:
                   destination: new-reviews
-                  
+
                   #consumer:
-                      #header-mode: raw        
+                      #header-mode: raw
     couchbase:
         bootstrap-hosts: localhost
         bucket:
             name: review
-            password: pooya123
+            password: password
     mail:
         host: localhost
         port: 25

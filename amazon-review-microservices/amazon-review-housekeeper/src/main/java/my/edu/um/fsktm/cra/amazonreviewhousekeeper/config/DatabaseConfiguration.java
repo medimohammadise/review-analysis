@@ -69,7 +69,7 @@ public class DatabaseConfiguration {
     public Couchmove couchmove(Bucket couchbaseBucket) {
         log.debug("Configuring Couchmove");
         Couchmove couchMove = new Couchmove(couchbaseBucket, "config/couchmove/changelog");
-        couchMove.migrate();
+       //couchMove.migrate();
         return couchMove;
     }
 
