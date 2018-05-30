@@ -48,9 +48,11 @@ spring:
                     destination: topic-jhipster
                 newreview-subChannel:
                   destination: new-reviews
-
-                  #consumer:
-                      #header-mode: raw
+                  consumer:
+                      header-mode: raw
+                      #useNativeDecoding: true #disable binder doing any conversion and let Kafka do it natively.
+                      keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                      valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     couchbase:
         bootstrap-hosts: localhost
         bucket:

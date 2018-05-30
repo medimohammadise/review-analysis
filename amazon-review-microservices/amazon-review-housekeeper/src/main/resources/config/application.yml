@@ -81,7 +81,7 @@ management:
 
 spring:
     application:
-        name: amazonreviewhousekeeper
+        name: reviewhistory
     messages:
         basename: i18n/messages
     mvc:
@@ -89,6 +89,20 @@ spring:
             enabled: false
     thymeleaf:
         mode: HTML
+    cloud:
+            stream:
+                kafka:
+                 streams:
+                   binder:
+                    configuration:
+                      commit:
+                        interval:
+                          mms: 1000
+                      default:
+                        key:
+                         serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                        value:
+                         serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 
 server:
     servlet:

@@ -16,6 +16,9 @@ import com.codahale.metrics.annotation.Timed;
 import org.springframework.messaging.Message;
 import my.edu.um.fsktm.cra.amazonreviewhousekeeper.service.messaging.NewReviewPublisherChannel;
 import my.edu.um.fsktm.cra.amazonreviewhousekeeper.service.messaging.NewReviewPublishedEvent;
+
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/api")
 
@@ -29,10 +32,10 @@ public class ProducerResource {
     @GetMapping("/review/{productId}")
     @Timed
     public void produce(@PathVariable String productId) {
-    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId);
+    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId,LocalDateTime.now(),LocalDateTime.now());
           Message<NewReviewPublishedEvent> message= MessageBuilder.withPayload(newReviewPublishedEvent)
-          		.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
-        		  //.setHeader(KafkaHeaders.MESSAGE_KEY, newReviewPublishedEvent.getProductId().getBytes())
+          		//.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+        		  .setHeader(KafkaHeaders.MESSAGE_KEY, newReviewPublishedEvent.getProductId().getBytes())
           		.build();
           try {
     	      		channel.send(message);
@@ -41,6 +44,6 @@ public class ProducerResource {
           catch(Exception ex	) {
         	  		log.error(ex.getMessage());
           }
-       
+
     }
 }
