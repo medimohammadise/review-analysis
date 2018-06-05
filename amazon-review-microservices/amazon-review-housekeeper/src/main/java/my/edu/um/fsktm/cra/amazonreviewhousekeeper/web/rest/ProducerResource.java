@@ -17,7 +17,9 @@ import org.springframework.messaging.Message;
 import my.edu.um.fsktm.cra.amazonreviewhousekeeper.service.messaging.NewReviewPublisherChannel;
 import my.edu.um.fsktm.cra.amazonreviewhousekeeper.service.messaging.NewReviewPublishedEvent;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api")
@@ -32,7 +34,8 @@ public class ProducerResource {
     @GetMapping("/review/{productId}")
     @Timed
     public void produce(@PathVariable String productId) {
-    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId,LocalDateTime.now(),LocalDateTime.now());
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId,LocalDateTime.now(), LocalDate.parse("November 9, 2016",formatter));
           Message<NewReviewPublishedEvent> message= MessageBuilder.withPayload(newReviewPublishedEvent)
           		//.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
         		  .setHeader(KafkaHeaders.MESSAGE_KEY, newReviewPublishedEvent.getProductId().getBytes())

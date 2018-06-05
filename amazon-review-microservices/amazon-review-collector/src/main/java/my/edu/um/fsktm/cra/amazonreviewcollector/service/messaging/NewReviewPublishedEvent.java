@@ -1,37 +1,38 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class NewReviewPublishedEvent {
 	public String productId;
-    public LocalDateTime eventDateTime;
-    public LocalDateTime newReviewStartDateTime ;
+    public LocalDate eventDate;
+    public LocalDate newReviewStartDate ;
     public NewReviewPublishedEvent(){
 
     }
-    public NewReviewPublishedEvent(String productId, LocalDateTime eventDateTime, LocalDateTime newReviewStartDateTime) {
+    public NewReviewPublishedEvent(String productId, LocalDate eventDate, LocalDate newReviewStartDate) {
         this.productId = productId;
-        this.eventDateTime = eventDateTime;
-        this.newReviewStartDateTime = newReviewStartDateTime;
+        this.eventDate = eventDate;
+        this.newReviewStartDate = newReviewStartDate;
     }
 
 	public String getProductId() {
 		return productId;
 	}
 
-    public LocalDateTime getEventDateTime() {
-        return eventDateTime;
+    public LocalDate getEventDate() {
+        return eventDate;
     }
 
-    public LocalDateTime getNewReviewStartDateTime() {
-        return newReviewStartDateTime;
+    public LocalDate getNewReviewStartDate() {
+        return newReviewStartDate;
     }
 
-    public void setEventDateTime(LocalDateTime eventDateTime) {
-        this.eventDateTime = eventDateTime;
+    public void setEventDateTime(LocalDate eventDate) {
+        this.eventDate = eventDate;
     }
 
-    public void setNewReviewStartDateTime(LocalDateTime newReviewStartDateTime) {
-        this.newReviewStartDateTime = newReviewStartDateTime;
+    public void setNewReviewStartDateTime(LocalDate newReviewStartDate) {
+        this.newReviewStartDate = newReviewStartDate;
     }
 }

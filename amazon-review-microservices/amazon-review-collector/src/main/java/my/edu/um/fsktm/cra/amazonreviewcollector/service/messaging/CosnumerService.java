@@ -2,12 +2,8 @@ package my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging;
 
 
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.ReviewService;
-import org.apache.kafka.streams.KeyValue;
-import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Printed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +15,10 @@ public class CosnumerService {
 	 		this.reviewService=reviewService;
 	 	}
 
-	 	@StreamListener(ConsumerChannel.CHANNEL)
+	 	@StreamListener(ConsumerChannel.NEW_REVIEW_CHANNEL)
 	    public void consume(NewReviewPublishedEvent newReviewPublishedEvent) {
 	        log.info("Received message: {}.", newReviewPublishedEvent.getProductId());
-            reviewService.saveReview(newReviewPublishedEvent.getProductId());
+            reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getNewReviewStartDate());
 	    }
 
 	   /*@StreamListener(ConsumerChannel.CHANNEL)

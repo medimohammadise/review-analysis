@@ -3,6 +3,7 @@ package my.edu.um.fsktm.cra.amazonreviewhousekeeper.config;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import my.edu.um.fsktm.cra.amazonreviewhousekeeper.service.messaging.ConsumerChannel;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,7 @@ import my.edu.um.fsktm.cra.amazonreviewhousekeeper.service.messaging.NewReviewPu
  * See http://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/
  * for the official Spring Cloud Stream documentation.
  */
-@EnableBinding(value = { Source.class ,NewReviewPublisherChannel.class})
+@EnableBinding(value = { Source.class ,NewReviewPublisherChannel.class,ConsumerChannel.class})
 public class MessagingConfiguration {
 
     /**

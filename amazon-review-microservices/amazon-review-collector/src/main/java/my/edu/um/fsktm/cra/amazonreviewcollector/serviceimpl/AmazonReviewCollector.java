@@ -1,25 +1,20 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.serviceimpl;
 
+import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.springframework.stereotype.Service;
-
-import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
 
 
 @Service
@@ -36,7 +31,7 @@ public class AmazonReviewCollector {
 
 	// Find all URLs that start with "http://www.mkyong.com/page/" and add them to
 	// the HashSet
-	public List<Review> extractLatestReviews(String URL,String productID) {
+	public List<Review> extractLatestReviews(String URL,String productID,LocalDate startDate ) {
         Elements paginationBar=null;
 		Integer pageSize = 1;
 		Optional<Document> document = Optional.empty();
@@ -73,14 +68,21 @@ public class AmazonReviewCollector {
                     String reviewdate = c.select("div[id^=customer_review]").select("span[data-hook=review-date]").html();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
 
-                    reviews.add(new Review(
-                        productID,
-                        c.select("div[id^=customer_review]").attr("id").substring("customer_review-".length()),
-                        c.select("div[id^=customer_review]").select("a[data-hook=review-title]").html(),
-                        c.select("div[id^=customer_review]").select("a[data-hook=review-author]").html(),
-                        c.select("div[id^=customer_review]").select("span[data-hook=review-body]").html(),
-                        LocalDate.parse(c.select("div[id^=customer_review]").select("span[data-hook=review-date]")
-                            .html().substring(3), formatter)));
+
+                    LocalDate localReviewDate= LocalDate.parse(c.select("div[id^=customer_review]").select("span[data-hook=review-date]")
+                        .html().substring(3), formatter);
+
+                    if (localReviewDate.isAfter(startDate) ) {
+                        reviews.add(new Review(
+                            productID,
+                            c.select("div[id^=customer_review]").attr("id").substring("customer_review-".length()),
+                            c.select("div[id^=customer_review]").select("a[data-hook=review-title]").html(),
+                            c.select("div[id^=customer_review]").select("a[data-hook=review-author]").html(),
+                            c.select("div[id^=customer_review]").select("span[data-hook=review-body]").html(), localReviewDate)
+                        );
+                    }
+                    else
+                        return ;
 
                 });
 
