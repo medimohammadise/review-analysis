@@ -3,6 +3,7 @@ package my.edu.um.fsktm.cra.amazonreviewcollector.config;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging.ProducerChannel;
 import org.apache.kafka.streams.kstream.KStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ import my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging.ConsumerChann
  * See http://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/
  * for the official Spring Cloud Stream documentation.
  */
-@EnableBinding(value = { Source.class,ConsumerChannel.class})
+@EnableBinding(value = { Source.class,ConsumerChannel.class,ProducerChannel.class})
 public class MessagingConfiguration {
 	 private final Logger log = LoggerFactory.getLogger(getClass());
     /**

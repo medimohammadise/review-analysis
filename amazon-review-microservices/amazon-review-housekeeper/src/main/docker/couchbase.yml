@@ -10,6 +10,6 @@ services:
             - 8093:8093
             - 11210:11210
         environment:
-            - BUCKET=amazonreviewhousekeeper
+            - BUCKET=review-history
 #        volumes:
 #            - ~/volumes/jhipster/amazonreviewhousekeeper/couchbase/:/opt/couchbase/var

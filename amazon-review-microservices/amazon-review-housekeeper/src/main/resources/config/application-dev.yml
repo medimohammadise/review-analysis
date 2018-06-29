@@ -51,11 +51,19 @@ spring:
                   content-type: application/json
                   producer:
                     header-mode: raw  #cause skip parsing header for middlewares that do not support header
+                newreview-grabChannel:
+                    destination: new-reviews-history
+                    consumer:
+                        header-mode: raw
+                        #useNativeDecoding: true #disable binder doing any conversion and let Kafka do it natively.
+                        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                        valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
     couchbase:
         bootstrap-hosts: localhost
         bucket:
             name: reviewhistory
-            password: pooya123
+            password: password
     mail:
         host: localhost
         port: 25

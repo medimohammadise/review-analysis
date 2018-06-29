@@ -13,23 +13,31 @@ import org.springframework.stereotype.Service;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.ReviewService;
 
 @Service
-public  class  CosnumerService {
+public class CosnumerService {
 	 ReviewService reviewService;
 	 private final Logger log = LoggerFactory.getLogger(getClass());
 	 	public CosnumerService(ReviewService reviewService) {
 	 		this.reviewService=reviewService;
 	 	}
-	 
-	 	/*@StreamListener(ConsumerChannel.CHANNEL)
-	    public void consume(NewReviewPublishedEvent greeting) {
-	        log.info("Received message: {}.", greeting.getProductId());
-	    }*/
-	 	
-	   @StreamListener(ConsumerChannel.CHANNEL)
-	    public void consume(@Input(ConsumerChannel.CHANNEL) KStream<?,?> newReviewPublishedEvent ) {
-	    		//newReviewPublishedEvent.flatMap(arg0)
-	    	    log.info("recived product is *****"+newReviewPublishedEvent.toString());
-	        //log.info("Review for Product Id  is ready to collect", readyToCollectReview.getProductId());
-	        //reviewService.saveReview(readyToCollectReview.getProductId());
+
+	 	@StreamListener(ConsumerChannel.NEW_REVIEW_CHANNEL)
+	    public void consume(NewReviewPublishedEvent newReviewPublishedEvent) {
+	        log.info("Received message: {}.", newReviewPublishedEvent.getProductId());
+            reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getNewReviewStartDate());
 	    }
+
+	   /*@StreamListener(ConsumerChannel.CHANNEL)
+	    public void consume(@Input(ConsumerChannel.CHANNEL) KStream<String,NewReviewPublishedEvent> newReviewPublishedEvent ) {
+	    		//newReviewPublishedEvent.flatMap(arg0)
+	    	    log.info("successfully created connected to steam of new reviews");
+
+
+
+           newReviewPublishedEvent.map((k, v) ->  {
+               log.info("Key: " + k + " value: " + v.getEventDateTime());
+               return new KeyValue<>(k, v);
+           });
+
+	        //reviewService.saveReview(readyToCollectReview.getProductId());
+	    }*/
 }

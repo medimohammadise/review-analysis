@@ -36,7 +36,7 @@ spring:
                     destination: topic-jhipster
     couchbase:
         bucket:
-            name: jhipster
+            name: review-history
             password: password
     mail:
         host: localhost
