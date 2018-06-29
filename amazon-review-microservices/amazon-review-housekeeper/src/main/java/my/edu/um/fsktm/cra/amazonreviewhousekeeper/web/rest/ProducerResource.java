@@ -31,8 +31,8 @@ public class ProducerResource {
     public void produce(@PathVariable String productId) {
     		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId);
           Message<NewReviewPublishedEvent> message= MessageBuilder.withPayload(newReviewPublishedEvent)
-          		.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
-        		  //.setHeader(KafkaHeaders.MESSAGE_KEY, newReviewPublishedEvent.getProductId().getBytes())
+          		//.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+        		  .setHeader(KafkaHeaders.MESSAGE_KEY, newReviewPublishedEvent.getProductId().getBytes())
           		.build();
           try {
     	      		channel.send(message);

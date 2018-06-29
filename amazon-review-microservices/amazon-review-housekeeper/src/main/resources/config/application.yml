@@ -81,7 +81,21 @@ management:
 
 spring:
     application:
-        name: amazonreviewhousekeeper
+        name: reviewhistory
+    cloud:
+        stream:
+            kafka:
+             streams:
+               binder:
+                configuration:
+                  commit:
+                    interval:
+                      mms: 1000 
+                  default:
+                    key:
+                     serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                    value:
+                     serde: org.apache.kafka.common.serialization.Serdes$StringSerde      
     messages:
         basename: i18n/messages
     mvc:

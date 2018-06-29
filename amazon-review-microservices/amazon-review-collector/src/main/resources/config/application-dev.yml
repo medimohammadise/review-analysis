@@ -40,6 +40,13 @@ spring:
     cloud:
         stream:
             kafka:
+                streams:
+                  bindings:
+                   newreview-subChannel: 
+                     consumer:
+                      keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                      valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                     
                 binder:
                     brokers: localhost
                     zk-nodes: localhost
@@ -49,8 +56,9 @@ spring:
                 newreview-subChannel:
                   destination: new-reviews
                   
-                  #consumer:
-                      #header-mode: raw        
+                  consumer:
+                      header-mode: raw  
+                      useNativeDecoding: true      
     couchbase:
         bootstrap-hosts: localhost
         bucket:

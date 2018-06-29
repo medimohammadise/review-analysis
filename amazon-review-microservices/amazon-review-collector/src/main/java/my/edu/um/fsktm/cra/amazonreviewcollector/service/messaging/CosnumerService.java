@@ -13,23 +13,23 @@ import org.springframework.stereotype.Service;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.ReviewService;
 
 @Service
-public class CosnumerService {
+public  class  CosnumerService {
 	 ReviewService reviewService;
 	 private final Logger log = LoggerFactory.getLogger(getClass());
 	 	public CosnumerService(ReviewService reviewService) {
 	 		this.reviewService=reviewService;
 	 	}
 	 
-	 	@StreamListener(ConsumerChannel.CHANNEL)
+	 	/*@StreamListener(ConsumerChannel.CHANNEL)
 	    public void consume(NewReviewPublishedEvent greeting) {
 	        log.info("Received message: {}.", greeting.getProductId());
-	    }
+	    }*/
 	 	
-	   /*@StreamListener(ConsumerChannel.CHANNEL)
+	   @StreamListener(ConsumerChannel.CHANNEL)
 	    public void consume(@Input(ConsumerChannel.CHANNEL) KStream<?,?> newReviewPublishedEvent ) {
 	    		//newReviewPublishedEvent.flatMap(arg0)
 	    	    log.info("recived product is *****"+newReviewPublishedEvent.toString());
 	        //log.info("Review for Product Id  is ready to collect", readyToCollectReview.getProductId());
 	        //reviewService.saveReview(readyToCollectReview.getProductId());
-	    }*/
+	    }
 }
