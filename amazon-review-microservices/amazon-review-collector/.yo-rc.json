@@ -1,0 +1,32 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "my.edu.um.fsktm.cra.amazonreviewcollector"
+    },
+    "jhipsterVersion": "5.0.0-beta.1",
+    "baseName": "amazonreviewcollector",
+    "packageName": "my.edu.um.fsktm.cra.amazonreviewcollector",
+    "packageFolder": "my/edu/um/fsktm/cra/amazonreviewcollector",
+    "serverPort": "8882",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "couchbase",
+    "devDatabaseType": "couchbase",
+    "prodDatabaseType": "couchbase",
+    "searchEngine": false,
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "7a8ab2de02e6f5d16b26c4b4af7f92ed0e4be7d7",
+    "enableTranslation": false,
+    "applicationType": "microservice",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "clientPackageManager": "yarn",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
