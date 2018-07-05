@@ -1,0 +1,32 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.edu.um.fsktm.cra.reviewtokenizer"
+    },
+    "jhipsterVersion": "5.0.0-beta.2",
+    "applicationType": "microservice",
+    "baseName": "reviewtokenizer",
+    "packageName": "com.edu.um.fsktm.cra.reviewtokenizer",
+    "packageFolder": "com/edu/um/fsktm/cra/reviewtokenizer",
+    "serverPort": "8882",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "couchbase",
+    "devDatabaseType": "couchbase",
+    "prodDatabaseType": "couchbase",
+    "searchEngine": false,
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "f457a7fdb47016b1c87f7fe6c30ae2fc16c721f6",
+    "enableTranslation": false,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "clientPackageManager": "yarn",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
