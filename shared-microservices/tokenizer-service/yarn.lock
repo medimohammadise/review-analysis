@@ -760,9 +760,9 @@ gauge@~1.2.5:
     lodash.padend "^4.1.0"
     lodash.padstart "^4.1.0"
 
-generator-jhipster@5.0.0-beta.2:
-  version "5.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/generator-jhipster/-/generator-jhipster-5.0.0-beta.2.tgz#088bbfbfe026305bdef8f3f750ea3af023c5d585"
+generator-jhipster@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/generator-jhipster/-/generator-jhipster-5.0.1.tgz#6035f46bbc2b8959106e01fd2cbec1e9e2c8f5ca"
   dependencies:
     chalk "2.4.1"
     commander "2.15.1"
