@@ -69,8 +69,7 @@ public class AmazonReviewCollector {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
 
 
-                    LocalDate localReviewDate= LocalDate.parse(c.select("div[id^=customer_review]").select("span[data-hook=review-date]")
-                        .html().substring(3), formatter);
+                    LocalDate localReviewDate= LocalDate.parse(reviewdate, formatter);
 
                     if (localReviewDate.isAfter(startDate) ) {
                         reviews.add(new Review(
