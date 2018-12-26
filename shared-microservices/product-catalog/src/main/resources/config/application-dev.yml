@@ -50,7 +50,7 @@ spring:
         bootstrap-hosts: localhost
         bucket:
             name: productcatalog
-            password: password
+            password: pooya123
     mail:
         host: localhost
         port: 25

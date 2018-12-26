@@ -8,15 +8,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/postagger")
+@RequestMapping("/api/nlp")
 public class PosTaggerResource {
     PosTaggerService posTaggerService;
     public PosTaggerResource (PosTaggerService posTaggerService){
         this.posTaggerService=posTaggerService;
     }
-    @GetMapping()
+    @GetMapping("/postagger")
     public List<String> findPOSTaggerInText(@RequestParam String input) {
         return posTaggerService.findPOSTaggerInText(input);
+
+    }
+
+    @GetMapping("/sentiment")
+    public Double getSentiment(@RequestParam String input) {
+        return posTaggerService.sentiment(input);
 
     }
 

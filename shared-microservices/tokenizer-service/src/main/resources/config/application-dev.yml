@@ -50,7 +50,7 @@ spring:
         bootstrap-hosts: localhost
         bucket:
             name: review
-            password: pooya123
+            password: password
     mail:
         host: localhost
         port: 25
@@ -85,7 +85,7 @@ spring:
 #        key-alias: reviewtokenizer
 # ===================================================================
 server:
-    port: 8882
+    port: 8883
 
 # ===================================================================
 # JHipster specific properties
