@@ -53,7 +53,7 @@ public class ReviewServiceImpl implements ReviewService{
         sendReviewCollectedMessage(productId,reviews);
 
 	}
-    private void sendReviewCollectedMessage(String productId,List<Review> reviews){
+    public void sendReviewCollectedMessage(String productId,List<Review> reviews){
 	    log.info("number of reviews collected : "+reviews.stream().count() );
         if (reviews.stream().count()>0) {
             NewReviewCollectedEvent newReviewCollectedEvent = new NewReviewCollectedEvent();
@@ -73,4 +73,18 @@ public class ReviewServiceImpl implements ReviewService{
             }
         }
     }
+    public void publishCollectedReview(Review review){
+        Message<Review> message = MessageBuilder.withPayload(review)
+            //.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+            .setHeader(KafkaHeaders.MESSAGE_KEY, review.getId().getBytes())
+            .build();
+        try {
+            channel.send(message);
+            log.info("message sent " + message);
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+        }
+
+    }
+
 }

@@ -63,7 +63,7 @@ spring:
         bootstrap-hosts: localhost
         bucket:
             name: review
-            password: pooya123
+            password: password
     mail:
         host: localhost
         port: 25

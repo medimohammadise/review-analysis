@@ -19,10 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 @Service
-public class PosTaggerService {
+public class SentimentService {
     StanfordCoreNLP tokenizer;
     StanfordCoreNLP pipeline;
-    public PosTaggerService(){
+    public SentimentService(){
         Properties tokenizerproperties = new Properties();
         tokenizerproperties.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse");
         this.tokenizer = new StanfordCoreNLP(tokenizerproperties);

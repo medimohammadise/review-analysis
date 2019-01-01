@@ -40,12 +40,20 @@ spring:
     cloud:
         stream:
             kafka:
+                streams:
+                    bindings:
+                        newreview-grabChannel:
+                            consumer:
+                                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                                valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
                 binder:
                     brokers: localhost
                     zk-nodes: localhost
             bindings:
                 output:
                     destination: topic-jhipster
+
     couchbase:
         bootstrap-hosts: localhost
         bucket:
