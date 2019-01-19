@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class NewReviewPublishedEvent {
-	public String productId;
-    public LocalDateTime eventDateTime;
-    public LocalDate newReviewStartDateTime ;
+	private String productId;
+    private String channelURL;
+    private LocalDateTime eventDateTime;
+    private LocalDate newReviewStartDateTime ;
 
-    public NewReviewPublishedEvent(String productId, LocalDateTime eventDateTime, LocalDate newReviewStartDateTime) {
+    public NewReviewPublishedEvent(String productId,String channelURL, LocalDateTime eventDateTime, LocalDate newReviewStartDateTime) {
         this.productId = productId;
+        this.channelURL=channelURL;
         this.eventDateTime = eventDateTime;
         this.newReviewStartDateTime = newReviewStartDateTime;
     }
@@ -22,6 +24,14 @@ public class NewReviewPublishedEvent {
 		this.productId = productId;
 		return this.productId;
 	}
+
+    public String getChannelURL() {
+        return channelURL;
+    }
+
+    public void setChannelURL(String channelURL) {
+        this.channelURL = channelURL;
+    }
 
     public LocalDateTime getEventDateTime() {
         return eventDateTime;

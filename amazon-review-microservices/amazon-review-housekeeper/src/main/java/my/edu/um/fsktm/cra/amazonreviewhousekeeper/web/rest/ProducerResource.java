@@ -35,7 +35,7 @@ public class ProducerResource {
     @Timed
     public void produce(@PathVariable String productId) {
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
-    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId,LocalDateTime.now(), LocalDate.parse("November 9, 2016",formatter));
+    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId,"https://www.amazon.com/product-reviews",LocalDateTime.now(), LocalDate.parse("November 9, 2016",formatter));
           Message<NewReviewPublishedEvent> message= MessageBuilder.withPayload(newReviewPublishedEvent)
           		//.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
         		  .setHeader(KafkaHeaders.MESSAGE_KEY, newReviewPublishedEvent.getProductId().getBytes())

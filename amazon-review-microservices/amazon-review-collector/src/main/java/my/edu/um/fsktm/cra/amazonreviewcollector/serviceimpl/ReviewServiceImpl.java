@@ -30,8 +30,8 @@ public class ReviewServiceImpl implements ReviewService{
 		this.channel=channel;
 	}
 	@Override
-	public void saveReview(String productId,LocalDate reviewStartDate) {
-		List<Review> reviews= amazonReviewCollector.extractLatestReviews("https://www.amazon.com/product-reviews/",productId,reviewStartDate);
+	public void saveReview(String productId,String channelURL,LocalDate reviewStartDate) {
+		List<Review> reviews= amazonReviewCollector.extractLatestReviews(channelURL,productId,reviewStartDate);
 
 		reviews.forEach(c->{
 				Review existingReview=null;

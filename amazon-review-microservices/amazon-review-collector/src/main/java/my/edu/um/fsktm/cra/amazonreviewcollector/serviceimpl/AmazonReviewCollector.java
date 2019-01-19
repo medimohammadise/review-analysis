@@ -19,32 +19,35 @@ import java.util.stream.IntStream;
 
 @Service
 public class AmazonReviewCollector {
-	private List<my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review> reviews;
-	private List<Integer> reviewRates;
-	private List<String> reviewBodies;
+	private  List<my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review> reviews;
+	//private static List<Integer> reviewRates;
+	//private static List<String> reviewBodies;
 
 	public AmazonReviewCollector() {
 		reviews = new ArrayList<>();
-		reviewRates = new ArrayList<>();
-		// articles = new ArrayList<>();
+		//reviewRates = new ArrayList<>();
 	}
 
 	// Find all URLs that start with "http://www.mkyong.com/page/" and add them to
 	// the HashSet
-	public List<Review> extractLatestReviews(String URL,String productID,LocalDate startDate ) {
+	public   List<Review> extractLatestReviews(String URL,String productID,LocalDate startDate ) {
         Elements paginationBar=null;
 		Integer pageSize = 1;
 		Optional<Document> document = Optional.empty();
 		Pattern pattern = Pattern.compile("(\\d+)");
 		try {
-			document = Optional.of(Jsoup.connect(URL+"/"+productID).get());
+			document = Optional.of(Jsoup.connect(URL+"/"+productID).ignoreContentType(true)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
+                    .referrer("http://www.google.com")
+                    .timeout(12000)
+                    .followRedirects(true).get());
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
 		if (document.isPresent()) {
-
-            pageSize = Integer.valueOf(document.get().select("div[id=cm_cr-pagination_bar]")
-                .select("li[data-reftag=\"cm_cr_arp_d_paging_btm\"]").last().select("a").first().html());
+            pageSize = Integer.valueOf(document.get().select("div[id~=cm_cr]")
+                .select("li[class~=page-button]").last().
+                            select("a").first().html());
             IntStream.range(1, pageSize).forEach(pageNo -> {
                 Document pageDocument = null;
                 try {
@@ -89,5 +92,9 @@ public class AmazonReviewCollector {
         }
 		return reviews;
 	}
+	/*public static void main(String[] args){
+        extractLatestReviews("https://www.amazon.com/product-reviews","B00UGBWR0E",LocalDate.now().minusYears(4));
+
+    }*/
 
 }

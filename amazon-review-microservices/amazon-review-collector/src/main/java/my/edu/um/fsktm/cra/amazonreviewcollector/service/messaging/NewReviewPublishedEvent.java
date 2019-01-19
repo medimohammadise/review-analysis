@@ -4,35 +4,51 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class NewReviewPublishedEvent {
-	public String productId;
-    public LocalDate eventDate;
-    public LocalDate newReviewStartDate ;
+    private String productId;
+    private String channelURL;
+    private LocalDateTime eventDateTime;
+    private LocalDate newReviewStartDateTime;
     public NewReviewPublishedEvent(){
 
     }
-    public NewReviewPublishedEvent(String productId, LocalDate eventDate, LocalDate newReviewStartDate) {
+
+    public NewReviewPublishedEvent(String productId, String channelURL, LocalDateTime eventDateTime, LocalDate newReviewStartDateTime) {
         this.productId = productId;
-        this.eventDate = eventDate;
-        this.newReviewStartDate = newReviewStartDate;
+        this.channelURL = channelURL;
+        this.eventDateTime = eventDateTime;
+        this.newReviewStartDateTime = newReviewStartDateTime;
     }
 
-	public String getProductId() {
-		return productId;
-	}
-
-    public LocalDate getEventDate() {
-        return eventDate;
+    public String getProductId() {
+        return productId;
     }
 
-    public LocalDate getNewReviewStartDate() {
-        return newReviewStartDate;
+    public String setProductId(String productId) {
+        this.productId = productId;
+        return this.productId;
     }
 
-    public void setEventDateTime(LocalDate eventDate) {
-        this.eventDate = eventDate;
+    public String getChannelURL() {
+        return channelURL;
     }
 
-    public void setNewReviewStartDateTime(LocalDate newReviewStartDate) {
-        this.newReviewStartDate = newReviewStartDate;
+    public void setChannelURL(String channelURL) {
+        this.channelURL = channelURL;
+    }
+
+    public LocalDateTime getEventDateTime() {
+        return eventDateTime;
+    }
+
+    public LocalDate getNewReviewStartDateTime() {
+        return newReviewStartDateTime;
+    }
+
+    public void setEventDateTime(LocalDateTime eventDateTime) {
+        this.eventDateTime = eventDateTime;
+    }
+
+    public void setNewReviewStartDateTime(LocalDate newReviewStartDateTime) {
+        this.newReviewStartDateTime = newReviewStartDateTime;
     }
 }

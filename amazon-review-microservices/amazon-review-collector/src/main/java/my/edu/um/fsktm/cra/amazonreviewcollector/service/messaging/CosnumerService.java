@@ -23,7 +23,7 @@ public class CosnumerService {
 	 	@StreamListener(ConsumerChannel.NEW_REVIEW_CHANNEL)
 	    public void consume(NewReviewPublishedEvent newReviewPublishedEvent) {
 	        log.info("Received message: {}.", newReviewPublishedEvent.getProductId());
-            reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getNewReviewStartDate());
+            reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getChannelURL(),newReviewPublishedEvent.getNewReviewStartDateTime());
 	    }
 
 	   /*@StreamListener(ConsumerChannel.CHANNEL)

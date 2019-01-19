@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ReviewService {
-    public void saveReview(String productId, LocalDate reviewStartDate);
+    public void saveReview(String productId,String channelURL, LocalDate reviewStartDate);
     public void sendReviewCollectedMessage(String productId, List<Review> reviews);
     public void publishCollectedReview(Review review);
 }
