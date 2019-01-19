@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     public Product saveProduct(Product product) {
         Product existingProduct=null;
         //Optional<Product> existingProductOpt=Optional.ofNullable(existingProduct);
-        existingProduct= productRepository.findByProductIdInChannelAndPrductSalesChannel(product.getProductIdInChannel(),product.prductSalesChannel);
+        existingProduct= productRepository.findByProductIdInChannelAndPrductSalesChannel(product.getProductIdInChannel(),product.getPrductSalesChannel());
         if (existingProduct==null) {
             Long maxId = productRepository.findAll().stream().map(v -> v.getId()).mapToLong(v -> v).max().orElse(1);
             product.setId(maxId);
@@ -40,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
             existingProduct.setName(product.getName());
             existingProduct.setPrductSalesChannel(product.getPrductSalesChannel());
             existingProduct.setProductIdInChannel(product.getPrductSalesChannel());
+            existingProduct.setChannelURL(product.getChannelURL());
             return productRepository.save(existingProduct);
         }
 

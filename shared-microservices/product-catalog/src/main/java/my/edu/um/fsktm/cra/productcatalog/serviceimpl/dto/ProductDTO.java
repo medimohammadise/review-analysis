@@ -1,32 +1,10 @@
-package my.edu.um.fsktm.cra.productcatalog.domain;
+package my.edu.um.fsktm.cra.productcatalog.serviceimpl.dto;
 
-import com.couchbase.client.java.repository.annotation.Field;
-import com.couchbase.client.java.repository.annotation.Id;
-
-import javax.validation.constraints.NotNull;
-
-public class Product {
-    @Field
-    @Id
+public class ProductDTO {
     private long id;
-
-    @NotNull(message = "productIdInChannel is missing")
-    @Field
     private String productIdInChannel;
-    @Field
-
-    @NotNull(message = "prductSalesChannel is missing")
     private String prductSalesChannel;
-
-    @NotNull(message = "name is missing")
-    @Field
     private String name;
-
-    @Field
-    private boolean reviewCollectionActive=true;
-
-    @NotNull(message = "channelURL is missing")
-    @Field
     private String channelURL;
 
     public long getId() {
@@ -59,14 +37,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isReviewCollectionActive() {
-        return reviewCollectionActive;
-    }
-
-    public void setReviewCollectionActive(boolean reviewCollectionActive) {
-        this.reviewCollectionActive = reviewCollectionActive;
     }
 
     public String getChannelURL() {
