@@ -21,13 +21,13 @@ import java.util.Collection;
 @SpringBootApplication
 @EnableConfigurationProperties({ApplicationProperties.class})
 @EnableDiscoveryClient
-public class ReviewtokenizerApp {
+public class SentimentMicroserviceApp {
 
-    private static final Logger log = LoggerFactory.getLogger(ReviewtokenizerApp.class);
+    private static final Logger log = LoggerFactory.getLogger(SentimentMicroserviceApp.class);
 
     private final Environment env;
 
-    public ReviewtokenizerApp(Environment env) {
+    public SentimentMicroserviceApp(Environment env) {
         this.env = env;
     }
 
@@ -57,7 +57,7 @@ public class ReviewtokenizerApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(ReviewtokenizerApp.class);
+        SpringApplication app = new SpringApplication(SentimentMicroserviceApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         String protocol = "http";

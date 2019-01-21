@@ -1,6 +1,6 @@
 package com.edu.um.fsktm.cra.reviewtokenizer.web.rest.errors;
 
-import com.edu.um.fsktm.cra.reviewtokenizer.ReviewtokenizerApp;
+import com.edu.um.fsktm.cra.reviewtokenizer.SentimentMicroserviceApp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ExceptionTranslator
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ReviewtokenizerApp.class)
+@SpringBootTest(classes = SentimentMicroserviceApp.class)
 public class ExceptionTranslatorIntTest {
 
     @Autowired
