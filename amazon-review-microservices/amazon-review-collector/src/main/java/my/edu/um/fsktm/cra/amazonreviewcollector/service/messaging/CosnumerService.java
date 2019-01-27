@@ -26,6 +26,11 @@ public class CosnumerService {
             reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getChannelURL(),newReviewPublishedEvent.getNewReviewStartDateTime());
 	    }
 
+	@StreamListener(ConsumerChannel.REVIEW_ANALYSIS_RESULT_CHANNEL)
+	public void consumeAnalysisREsult(ReviewEvent newReviewPublishedEvent) {
+		log.info("Received message: {}.", newReviewPublishedEvent.getProductId());
+		//reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getChannelURL(),newReviewPublishedEvent.getNewReviewStartDateTime());
+	}
 	   /*@StreamListener(ConsumerChannel.CHANNEL)
 	    public void consume(@Input(ConsumerChannel.CHANNEL) KStream<String,NewReviewPublishedEvent> newReviewPublishedEvent ) {
 	    		//newReviewPublishedEvent.flatMap(arg0)

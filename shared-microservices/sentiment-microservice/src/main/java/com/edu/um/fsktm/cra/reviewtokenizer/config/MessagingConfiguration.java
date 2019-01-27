@@ -4,14 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.edu.um.fsktm.cra.reviewtokenizer.service.messaging.ConsumerChannel;
-import com.edu.um.fsktm.cra.reviewtokenizer.service.messaging.ProducerChannel;
+import com.edu.um.fsktm.cra.reviewtokenizer.service.messaging.ReviewAnalyseResultPublisherChannel;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.messaging.support.GenericMessage;
-import sun.reflect.misc.ConstructorUtil;
 
 /**
  * Configures Spring Cloud Stream support.
@@ -21,7 +20,7 @@ import sun.reflect.misc.ConstructorUtil;
  * See http://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/
  * for the official Spring Cloud Stream documentation.
  */
-@EnableBinding(value = { Source.class, ConsumerChannel.class })
+@EnableBinding(value = { Source.class, ConsumerChannel.class, ReviewAnalyseResultPublisherChannel.class })
 public class MessagingConfiguration {
 
     /**

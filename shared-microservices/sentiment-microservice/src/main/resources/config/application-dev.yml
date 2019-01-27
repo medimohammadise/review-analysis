@@ -53,6 +53,11 @@ spring:
             bindings:
                 output:
                     destination: topic-jhipster
+                review-analyse-result:
+                    destination: review-analyse-result
+                    content-type: application/json
+                    producer:
+                        header-mode: raw  #cause skip parsing header for middlewares that do not support header
 
     couchbase:
         bootstrap-hosts: localhost

@@ -8,7 +8,7 @@ import org.springframework.messaging.SubscribableChannel;
 public interface ConsumerChannel {
 	String NEW_REVIEW_CHANNEL = "newreview-grabChannel";
 	 @Input(NEW_REVIEW_CHANNEL)
-	 //KStream<String,NewReviewPublishedEvent> subChannel();
+	 //KStream<String,ReviewEvent> subChannel();
      SubscribableChannel subscribableChannel();
 
 }

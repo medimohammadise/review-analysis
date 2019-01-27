@@ -46,7 +46,10 @@ spring:
                      consumer:
                       keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
                       valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                     
+                   review-analyse-result:
+                     consumer:
+                        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                        valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
                 binder:
                     brokers: localhost
                     zk-nodes: localhost
@@ -55,10 +58,15 @@ spring:
                     destination: topic-jhipster
                 newreview-subChannel:
                   destination: new-reviews
-                  
                   consumer:
                       header-mode: raw  
-                      useNativeDecoding: true      
+                      useNativeDecoding: true
+                review-analyse-result:
+                    destination: review-analyse-result
+                    consumer:
+                        header-mode: raw
+                        useNativeDecoding: true
+
     couchbase:
         bootstrap-hosts: localhost
         bucket:

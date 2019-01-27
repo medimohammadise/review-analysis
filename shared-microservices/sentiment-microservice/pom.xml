@@ -6,7 +6,7 @@
     <artifactId>reviewtokenizer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>SentimentMicroService</name>
+    <name>SentimentMicroservice</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

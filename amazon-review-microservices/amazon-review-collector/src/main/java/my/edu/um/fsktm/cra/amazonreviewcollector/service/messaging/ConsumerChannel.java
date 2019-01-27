@@ -6,9 +6,15 @@ import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
 
 public interface ConsumerChannel {
-	String NEW_REVIEW_CHANNEL = "newreview-subChannel";
+	 String NEW_REVIEW_CHANNEL = "newreview-subChannel";
 	 @Input(NEW_REVIEW_CHANNEL)
 	 //KStream<String,NewReviewPublishedEvent> subChannel();
 	 SubscribableChannel subscribableChannel();
+
+
+	String REVIEW_ANALYSIS_RESULT_CHANNEL = "review-analyse-result";
+	@Input(REVIEW_ANALYSIS_RESULT_CHANNEL)
+		//KStream<String,NewReviewPublishedEvent> subChannel();
+	SubscribableChannel reviewresutsubscribableChannel();
 
 }

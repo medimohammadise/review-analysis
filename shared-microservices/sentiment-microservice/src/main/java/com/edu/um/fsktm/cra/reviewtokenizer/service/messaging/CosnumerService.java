@@ -6,25 +6,40 @@ import com.edu.um.fsktm.cra.reviewtokenizer.web.rest.dto.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class CosnumerService {
-     SentimentService sentimentService;
+     private final SentimentService sentimentService;
+
 	 private final Logger log = LoggerFactory.getLogger(getClass());
 	 	public CosnumerService(SentimentService sentimentService
-                                ) {
+				//, MessageChannel channel
+		)
+		{
 	 		this.sentimentService=sentimentService;
+	 		//this.channel=channel;
 	 	}
 
 	 	@StreamListener(ConsumerChannel.NEW_REVIEW_CHANNEL)
 	    public void consume(Review review) {
 	        log.info("Received message in sentiment microservice: {}.", review.getId());
-            sentimentService.sentiment(review.getReviewText());
+	        double sentiment=sentimentService.sentiment(review.getReviewText());
+	        review.setSentiment(sentiment);
+
+
 	    }
 
+
+
 	   /*@StreamListener(ConsumerChannel.CHANNEL)
-	    public void consume(@Input(ConsumerChannel.CHANNEL) KStream<String,NewReviewPublishedEvent> newReviewPublishedEvent ) {
+	    public void consume(@Input(ConsumerChannel.CHANNEL) KStream<String,ReviewEvent> newReviewPublishedEvent ) {
 	    		//newReviewPublishedEvent.flatMap(arg0)
 	    	    log.info("successfully created connected to steam of new reviews");
 

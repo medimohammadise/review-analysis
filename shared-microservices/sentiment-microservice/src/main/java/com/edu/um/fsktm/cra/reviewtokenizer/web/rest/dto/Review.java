@@ -43,7 +43,7 @@ public class Review implements Serializable {
     
 
     private LocalDate reviewDate;
-    
+    private double sentiment;
 
 	public String getId() {
 		return id;
@@ -105,6 +105,11 @@ public class Review implements Serializable {
 		this.productId = productId;
 	}
 
-  
-  
+	public double getSentiment() {
+		return sentiment;
+	}
+
+	public void setSentiment(double sentiment) {
+		this.sentiment = sentiment;
+	}
 }

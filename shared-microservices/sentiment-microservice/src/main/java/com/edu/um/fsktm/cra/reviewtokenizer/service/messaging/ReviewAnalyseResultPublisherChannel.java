@@ -5,10 +5,10 @@ import org.springframework.messaging.MessageChannel;
 
 //import org.springframework.messaging.SubscribableChannel;
 
-public interface ProducerChannel {
-	String NEW_REVIEW_COLECTED_CHANNEL = "newreview-grabChannel";
-	@Output(NEW_REVIEW_COLECTED_CHANNEL)
-	 //KStream<String,NewReviewPublishedEvent> subChannel();
+public interface ReviewAnalyseResultPublisherChannel {
+	String REVIEW_ANALYSED_CHANNEL = "review-analyse-result";
+	@Output(REVIEW_ANALYSED_CHANNEL)
+	 //KStream<String,ReviewEvent> subChannel();
     MessageChannel messageChannel();
 
 }
