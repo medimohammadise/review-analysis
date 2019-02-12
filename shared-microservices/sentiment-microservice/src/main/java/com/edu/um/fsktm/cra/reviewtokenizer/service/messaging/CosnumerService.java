@@ -1,6 +1,7 @@
 package com.edu.um.fsktm.cra.reviewtokenizer.service.messaging;
 
 
+import com.edu.um.fsktm.cra.reviewtokenizer.service.SentimentMessagePublisherService;
 import com.edu.um.fsktm.cra.reviewtokenizer.service.SentimentService;
 import com.edu.um.fsktm.cra.reviewtokenizer.web.rest.dto.Review;
 import org.slf4j.Logger;
@@ -17,14 +18,15 @@ import java.time.LocalDate;
 @Service
 public class CosnumerService {
      private final SentimentService sentimentService;
-
+	 private SentimentMessagePublisherService sentimentMessagePublisherService;
 	 private final Logger log = LoggerFactory.getLogger(getClass());
-	 	public CosnumerService(SentimentService sentimentService
-				//, MessageChannel channel
+	 	public CosnumerService(SentimentService sentimentService,
+				SentimentMessagePublisherService sentimentMessagePublisherService
 		)
 		{
 	 		this.sentimentService=sentimentService;
 	 		//this.channel=channel;
+			this.sentimentMessagePublisherService=sentimentMessagePublisherService;
 	 	}
 
 	 	@StreamListener(ConsumerChannel.NEW_REVIEW_CHANNEL)
@@ -32,7 +34,7 @@ public class CosnumerService {
 	        log.info("Received message in sentiment microservice: {}.", review.getId());
 	        double sentiment=sentimentService.sentiment(review.getReviewText());
 	        review.setSentiment(sentiment);
-
+			sentimentMessagePublisherService.sendMessage(review);
 
 	    }
 

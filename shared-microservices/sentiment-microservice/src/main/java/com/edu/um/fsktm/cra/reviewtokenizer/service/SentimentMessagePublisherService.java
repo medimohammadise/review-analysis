@@ -23,10 +23,10 @@ public class SentimentMessagePublisherService {
 
     }
     public void sendMessage(Review review){
-			ReviewEvent reviewEvent = new ReviewEvent(LocalDate.now(),review.getProductId(),review.getSentiment());
+			ReviewEvent reviewEvent = new ReviewEvent(LocalDate.now(),review.getId(),review.getSentiment());
 			Message<ReviewEvent> message = MessageBuilder.withPayload(reviewEvent)
 					//.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
-					.setHeader(KafkaHeaders.MESSAGE_KEY, reviewEvent.getProductId().getBytes())
+					.setHeader(KafkaHeaders.MESSAGE_KEY, reviewEvent.getReviewId().getBytes())
 					.build();
 			try {
 				channel.send(message);

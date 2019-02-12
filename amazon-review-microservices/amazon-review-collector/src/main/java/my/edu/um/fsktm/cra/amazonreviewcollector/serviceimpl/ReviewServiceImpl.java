@@ -4,6 +4,7 @@ import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
 import my.edu.um.fsktm.cra.amazonreviewcollector.repository.ReviewRepository;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.ReviewService;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging.NewReviewCollectedEvent;
+import my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging.ReviewEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,21 +17,22 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
     Logger log=LoggerFactory.getLogger(getClass());
-	ReviewRepository reviewRepository;
-	AmazonReviewCollector amazonReviewCollector;
-    private MessageChannel channel;
+	private final ReviewRepository reviewRepository;
+	private final AmazonReviewCollector amazonReviewCollector;
+    private final MessageChannel channel;
 	public ReviewServiceImpl(ReviewRepository reviewRepository,AmazonReviewCollector amazonReviewCollector,@Qualifier("newreview-grabChannel")MessageChannel channel) {
 		this.reviewRepository=reviewRepository;
 		this.amazonReviewCollector=amazonReviewCollector;
 		this.channel=channel;
 	}
 	@Override
-	public void saveReview(String productId,String channelURL,LocalDate reviewStartDate) {
+	public void extractAndsaveReview(String productId,String channelURL,LocalDate reviewStartDate) {
 		List<Review> reviews= amazonReviewCollector.extractLatestReviews(channelURL,productId,reviewStartDate);
 
 		reviews.forEach(c->{
@@ -47,12 +49,15 @@ public class ReviewServiceImpl implements ReviewService{
 				}
 
 				if (existingReview==null) reviewRepository.save(c);
+            publishCollectedReview(c);
 
 			});
 
-        sendReviewCollectedMessage(productId,reviews);
+        //sendReviewCollectedMessage(productId,reviews);
 
-	}
+
+
+    }
     public void sendReviewCollectedMessage(String productId,List<Review> reviews){
 	    log.info("number of reviews collected : "+reviews.stream().count() );
         if (reviews.stream().count()>0) {
@@ -87,4 +92,15 @@ public class ReviewServiceImpl implements ReviewService{
 
     }
 
+    @Override
+    public void saveReview(ReviewEvent analysedReview) {
+        Optional<Review> review=reviewRepository.findById(analysedReview.getReviewId());
+        if (review.isPresent())
+            review.get().setSentiment(analysedReview.getSentiment());
+            reviewRepository.save(review.get());
+    }
+
+    public void deleteAll(){
+        reviewRepository.deleteAll();
+    }
 }

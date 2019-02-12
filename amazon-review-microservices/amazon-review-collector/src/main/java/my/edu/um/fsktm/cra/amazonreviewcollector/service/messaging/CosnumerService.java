@@ -23,13 +23,13 @@ public class CosnumerService {
 	 	@StreamListener(ConsumerChannel.NEW_REVIEW_CHANNEL)
 	    public void consume(NewReviewPublishedEvent newReviewPublishedEvent) {
 	        log.info("Received message: {}.", newReviewPublishedEvent.getProductId());
-            reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getChannelURL(),newReviewPublishedEvent.getNewReviewStartDateTime());
+            reviewService.extractAndsaveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getChannelURL(),newReviewPublishedEvent.getNewReviewStartDateTime());
 	    }
 
 	@StreamListener(ConsumerChannel.REVIEW_ANALYSIS_RESULT_CHANNEL)
-	public void consumeAnalysisREsult(ReviewEvent newReviewPublishedEvent) {
-		log.info("Received message: {}.", newReviewPublishedEvent.getProductId());
-		//reviewService.saveReview(newReviewPublishedEvent.getProductId(),newReviewPublishedEvent.getChannelURL(),newReviewPublishedEvent.getNewReviewStartDateTime());
+	public void consumeAnalysisREsult(ReviewEvent analysedReview) {
+		log.info("Received message: {}.", analysedReview.getReviewId());
+		reviewService.saveReview(analysedReview);
 	}
 	   /*@StreamListener(ConsumerChannel.CHANNEL)
 	    public void consume(@Input(ConsumerChannel.CHANNEL) KStream<String,NewReviewPublishedEvent> newReviewPublishedEvent ) {

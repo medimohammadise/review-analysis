@@ -8,6 +8,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
 
 import com.couchbase.client.java.repository.annotation.Field;
+import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
+
+import static org.springframework.data.couchbase.core.mapping.id.GenerationStrategy.UNIQUE;
 
 /**
  *  Review.
@@ -16,7 +19,8 @@ import com.couchbase.client.java.repository.annotation.Field;
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public Review(String productId,String customerProfileId,String title,String author,String reviewText,LocalDate reviewDate) {
+    public Review(String productId,String customerProfileId,String title,String author,String reviewText,
+				  LocalDate reviewDate,double sentiment ) {
     	  this.id=UUID.randomUUID().toString();
     	  this.customerProfileId=customerProfileId;
     	  this.title=title;
@@ -24,8 +28,9 @@ public class Review implements Serializable {
     	  this.reviewText=reviewText;
     	  this.reviewDate=reviewDate;
     	  this.productId=productId;
+    	  this.sentiment=sentiment;
     }
-    @Id
+    @Id @GeneratedValue(strategy = UNIQUE)
     @Field
     private String id;
     
@@ -48,7 +53,9 @@ public class Review implements Serializable {
     
     @Field
     private LocalDate reviewDate;
-    
+
+	@Field
+	private Double sentiment;
 
 	public String getId() {
 		return id;
@@ -110,6 +117,11 @@ public class Review implements Serializable {
 		this.productId = productId;
 	}
 
-  
-  
+	public Double getSentiment() {
+		return sentiment;
+	}
+
+	public void setSentiment(Double sentiment) {
+		this.sentiment = sentiment;
+	}
 }

@@ -3,21 +3,25 @@ package com.edu.um.fsktm.cra.reviewtokenizer.service.messaging;
 import java.time.LocalDate;
 
 public class ReviewEvent {
-	public String productId;
+	public String reviewId;
     public LocalDate eventDate;
     public double sentiment ;
     public ReviewEvent(){
 
     }
-    public ReviewEvent(LocalDate eventDate, String productId, double sentiment) {
-        this.productId = productId;
+    public ReviewEvent(LocalDate eventDate, String reviewId, double sentiment) {
+        this.reviewId = reviewId;
         this.eventDate = eventDate;
         this.sentiment = sentiment;
     }
 
-	public String getProductId() {
-		return productId;
-	}
+    public String getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(String reviewId) {
+        this.reviewId = reviewId;
+    }
 
     public LocalDate getEventDate() {
         return eventDate;
