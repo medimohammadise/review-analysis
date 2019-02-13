@@ -1,14 +1,14 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.domain;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.UUID;
-
+import com.couchbase.client.java.repository.annotation.Field;
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
-
-import com.couchbase.client.java.repository.annotation.Field;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static org.springframework.data.couchbase.core.mapping.id.GenerationStrategy.UNIQUE;
 
@@ -19,8 +19,8 @@ import static org.springframework.data.couchbase.core.mapping.id.GenerationStrat
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public Review(String productId,String customerProfileId,String title,String author,String reviewText,
-				  LocalDate reviewDate,double sentiment ) {
+    public Review(String productId, String customerProfileId, String title, String author, String reviewText,
+				  String reviewDate, double sentiment ) {
     	  this.id=UUID.randomUUID().toString();
     	  this.customerProfileId=customerProfileId;
     	  this.title=title;
@@ -52,7 +52,7 @@ public class Review implements Serializable {
     private String customerProfileId;
     
     @Field
-    private LocalDate reviewDate;
+    private String reviewDate;
 
 	@Field
 	private Double sentiment;
@@ -97,11 +97,11 @@ public class Review implements Serializable {
 		this.customerProfileId = customerProfileId;
 	}
 
-	public LocalDate getReviewDate() {
+	public String getReviewDate() {
 		return reviewDate;
 	}
 
-	public void setReviewDate(LocalDate reviewDate) {
+	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 

@@ -1,5 +1,7 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.repository;
 
+import com.couchbase.client.deps.com.fasterxml.jackson.databind.JsonNode;
+import my.edu.um.fsktm.cra.amazonreviewcollector.web.rest.dto.InterviewAnalyticsDTO;
 import org.springframework.data.couchbase.core.query.Query;
 import org.springframework.data.couchbase.repository.CouchbasePagingAndSortingRepository;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -19,10 +21,14 @@ public interface N1qlCouchbaseRepository<T, ID extends Serializable> extends Cou
     @Query("SELECT count(*) FROM #{#n1ql.bucket} WHERE #{#n1ql.filter}")
     long count();
 
-    @Query("DELETE FROM #{#n1ql.bucket} WHERE #{#n1ql.filter} returning #{#n1ql.fields}")
+    @Query("DELETE FROM #{#n1ql.bucket} WHERE #{#n1ql.filter}")
     T removeAll();
+
 
     default void deleteAll() {
         removeAll();
     }
+
 }
+
+

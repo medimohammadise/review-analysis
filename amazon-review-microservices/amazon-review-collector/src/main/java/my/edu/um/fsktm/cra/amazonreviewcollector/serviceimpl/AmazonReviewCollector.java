@@ -1,20 +1,22 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.serviceimpl;
 
 import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 
 @Service
@@ -25,7 +27,7 @@ public class AmazonReviewCollector {
 	}
 
 
-	public   List<Review> extractLatestReviews(String URL,String productID,LocalDate startDate ) {
+	public   List<Review> extractLatestReviews(String URL, String productID, LocalDateTime startDate ) {
         reviews = new ArrayList<>();
         Elements allReviewsInPage=null;
         Integer pageNo = 1;
@@ -72,22 +74,24 @@ public class AmazonReviewCollector {
                     String reviewBody = c.select("div[id^=customer_review]").select("span[data-hook=review-body]").html();
                     String reviewTitle = c.select("div[id^=customer_review]").select("a[data-hook=review-title]").html();
                     String reviewAuthor = c.select("div[id^=customer_review]").select("a[data-hook=review-author]").html();
-                    String reviewdate = c.select("div[id^=customer_review]").select("span[data-hook=review-date]").html();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+                    String reviewDate = c.select("div[id^=customer_review]").select("span[data-hook=review-date]").html();
+
+                    DateTimeFormatter formatter =  DateTimeFormat.forPattern("d MMMM yyyy");
 
 
-                    LocalDate localReviewDate= LocalDate.parse(reviewdate, formatter);
+                    DateTime localReviewDate= DateTime.parse(reviewDate,formatter);
 
-                    if (localReviewDate.isAfter(startDate) ) {
+
+                   // if (localReviewDate.is ) {
                         System.out.println("new review received");
                         reviews.add(new Review(
                             productID,
                             c.select("div[id^=customer_review]").attr("id").substring("customer_review-".length()),
                             c.select("div[id^=customer_review]").select("a[data-hook=review-title]").html(),
                             c.select("div[id^=customer_review]").select("a[data-hook=review-author]").html(),
-                            c.select("div[id^=customer_review]").select("span[data-hook=review-body]").html(), localReviewDate,0)
+                            c.select("div[id^=customer_review]").select("span[data-hook=review-body]").html(), localReviewDate.toString(),0)
                         );
-                    }
+                    //}
                    // else
                    //     return ;
 

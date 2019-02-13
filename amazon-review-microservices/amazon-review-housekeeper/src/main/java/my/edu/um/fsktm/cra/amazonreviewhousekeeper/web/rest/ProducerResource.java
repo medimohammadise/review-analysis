@@ -34,9 +34,9 @@ public class ProducerResource {
     @GetMapping("/review/{productId}")
     @Timed
     public void produce(@PathVariable String productId) {
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy HH:mm:ss");
          //TODO product url should not be hard-coded
-    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId,"https://www.amazon.co.uk/product-reviews",LocalDateTime.now(), LocalDate.parse("February 1, 1980",formatter));
+    		  NewReviewPublishedEvent newReviewPublishedEvent=new NewReviewPublishedEvent(productId,"https://www.amazon.co.uk/product-reviews",LocalDateTime.now(), LocalDateTime.parse("February 1, 1980 12:00:00",formatter));
           Message<NewReviewPublishedEvent> message= MessageBuilder.withPayload(newReviewPublishedEvent)
           		//.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
         		  .setHeader(KafkaHeaders.MESSAGE_KEY, newReviewPublishedEvent.getProductId().getBytes())

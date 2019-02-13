@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
 public class NewReviewCollectedEvent {
 	public String productId;
     public LocalDateTime eventDateTime;
-    public LocalDate newReviewStartDateTime ;
+    public LocalDateTime newReviewStartDateTime ;
     public long numberOfReviews;
     public NewReviewCollectedEvent(){
 
     }
 
 
-    public NewReviewCollectedEvent(String productId, LocalDateTime eventDateTime, LocalDate newReviewStartDateTime, long numberOfReviews) {
+    public NewReviewCollectedEvent(String productId, LocalDateTime eventDateTime, LocalDateTime newReviewStartDateTime, long numberOfReviews) {
         this.productId = productId;
         this.eventDateTime = eventDateTime;
         this.newReviewStartDateTime = newReviewStartDateTime;
@@ -28,7 +28,7 @@ public class NewReviewCollectedEvent {
         return eventDateTime;
     }
 
-    public LocalDate getNewReviewStartDateTime() {
+    public LocalDateTime getNewReviewStartDateTime() {
         return newReviewStartDateTime;
     }
 
@@ -42,7 +42,7 @@ public class NewReviewCollectedEvent {
         this.eventDateTime = eventDateTime;
     }
 
-    public void setNewReviewStartDateTime(LocalDate newReviewStartDateTime) {
+    public void setNewReviewStartDateTime(LocalDateTime newReviewStartDateTime) {
         this.newReviewStartDateTime = newReviewStartDateTime;
     }
 

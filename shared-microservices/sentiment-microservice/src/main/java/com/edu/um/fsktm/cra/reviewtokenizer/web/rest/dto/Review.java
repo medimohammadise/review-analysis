@@ -14,7 +14,7 @@ public class Review implements Serializable {
     public Review(){
 
     }
-    public Review(String id, String productId, String customerProfileId, String title, String author, String reviewText, LocalDate reviewDate) {
+    public Review(String id, String productId, String customerProfileId, String title, String author, String reviewText, String reviewDate) {
     	  this.id=id;
     	  this.customerProfileId=customerProfileId;
     	  this.title=title;
@@ -42,7 +42,7 @@ public class Review implements Serializable {
     private String customerProfileId;
     
 
-    private LocalDate reviewDate;
+    private String reviewDate;
     private double sentiment;
 
 	public String getId() {
@@ -85,11 +85,11 @@ public class Review implements Serializable {
 		this.customerProfileId = customerProfileId;
 	}
 
-	public LocalDate getReviewDate() {
+	public String getReviewDate() {
 		return reviewDate;
 	}
 
-	public void setReviewDate(LocalDate reviewDate) {
+	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 

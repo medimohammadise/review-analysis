@@ -7,12 +7,12 @@ public class NewReviewPublishedEvent {
     private String productId;
     private String channelURL;
     private LocalDateTime eventDateTime;
-    private LocalDate newReviewStartDateTime;
+    private LocalDateTime newReviewStartDateTime;
     public NewReviewPublishedEvent(){
 
     }
 
-    public NewReviewPublishedEvent(String productId, String channelURL, LocalDateTime eventDateTime, LocalDate newReviewStartDateTime) {
+    public NewReviewPublishedEvent(String productId, String channelURL, LocalDateTime eventDateTime, LocalDateTime newReviewStartDateTime) {
         this.productId = productId;
         this.channelURL = channelURL;
         this.eventDateTime = eventDateTime;
@@ -40,7 +40,7 @@ public class NewReviewPublishedEvent {
         return eventDateTime;
     }
 
-    public LocalDate getNewReviewStartDateTime() {
+    public LocalDateTime getNewReviewStartDateTime() {
         return newReviewStartDateTime;
     }
 
@@ -48,7 +48,7 @@ public class NewReviewPublishedEvent {
         this.eventDateTime = eventDateTime;
     }
 
-    public void setNewReviewStartDateTime(LocalDate newReviewStartDateTime) {
+    public void setNewReviewStartDateTime(LocalDateTime newReviewStartDateTime) {
         this.newReviewStartDateTime = newReviewStartDateTime;
     }
 }
