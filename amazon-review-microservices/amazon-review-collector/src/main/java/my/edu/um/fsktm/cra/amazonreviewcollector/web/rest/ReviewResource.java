@@ -29,4 +29,6 @@ public class ReviewResource {
     public  List<InterviewAnalyticsDTO>  getAverageSentimentByMonth(){
         return reviewService.findAvarageSentimentByMonth();
     }
+
+
 }

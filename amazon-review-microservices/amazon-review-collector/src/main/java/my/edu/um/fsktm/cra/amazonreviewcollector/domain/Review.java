@@ -19,6 +19,9 @@ import static org.springframework.data.couchbase.core.mapping.id.GenerationStrat
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
+	public Review(){
+
+	}
     public Review(String productId, String customerProfileId, String title, String author, String reviewText,
 				  String reviewDate, double sentiment ) {
     	  this.id=UUID.randomUUID().toString();
@@ -47,7 +50,9 @@ public class Review implements Serializable {
     
     @Field
     private String reviewText;
-    
+
+	private String  reviewContent;
+
     @Field
     private String customerProfileId;
     
@@ -123,5 +128,13 @@ public class Review implements Serializable {
 
 	public void setSentiment(Double sentiment) {
 		this.sentiment = sentiment;
+	}
+
+	public String getReviewContent() {
+		return reviewContent;
+	}
+
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
 	}
 }
