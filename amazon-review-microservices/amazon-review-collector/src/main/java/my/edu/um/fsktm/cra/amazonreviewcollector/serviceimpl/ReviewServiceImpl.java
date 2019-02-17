@@ -117,8 +117,8 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public  List<InterviewAnalyticsDTO>  findAvarageSentimentByMonth() {
         List<InterviewAnalyticsDTO> jsonList=new ArrayList<>();
-        N1qlQueryResult r5= n1qlCouchbaseRepository.getCouchbaseOperations().getCouchbaseBucket().query(N1qlQuery.simple("SELECT avg(sentiment) as sentiment,DATE_PART_STR(reviewDate,'year') as year,DATE_PART_STR(reviewDate,'month') as month \n" +
-                "from review group by DATE_PART_STR(reviewDate,'year'),DATE_PART_STR(reviewDate,'month')\n" +
+        N1qlQueryResult r5= n1qlCouchbaseRepository.getCouchbaseOperations().getCouchbaseBucket().query(N1qlQuery.simple("SELECT avg(sentiment) as sentiment,DATE_PART_STR(reviewDate,'year') as year,DATE_PART_STR(reviewDate,'month') as month  \n" +
+                "from review  where channel='Amazon' group by DATE_PART_STR(reviewDate,'year'),DATE_PART_STR(reviewDate,'month')\n" +
                 "order by year,month") );
         System.out.println("return count --->"+r5.allRows().size());
         r5.allRows().stream().forEach(row->{

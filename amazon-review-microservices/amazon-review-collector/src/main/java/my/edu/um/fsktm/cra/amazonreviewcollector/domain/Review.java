@@ -1,13 +1,12 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.domain;
 
 import com.couchbase.client.java.repository.annotation.Field;
-import org.joda.time.DateTime;
+import my.edu.um.fsktm.cra.amazonreviewcollector.enumeration.ECommerceChannel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.springframework.data.couchbase.core.mapping.id.GenerationStrategy.UNIQUE;
@@ -22,9 +21,10 @@ public class Review implements Serializable {
 	public Review(){
 
 	}
-    public Review(String productId, String customerProfileId, String title, String author, String reviewText,
+    public Review(ECommerceChannel channel, String productId, String customerProfileId, String title, String author, String reviewText,
 				  String reviewDate, double sentiment ) {
     	  this.id=UUID.randomUUID().toString();
+    	  this.channel=channel;
     	  this.customerProfileId=customerProfileId;
     	  this.title=title;
     	  this.author=author;
@@ -61,6 +61,9 @@ public class Review implements Serializable {
 
 	@Field
 	private Double sentiment;
+
+	@Field
+	private ECommerceChannel channel;
 
 	public String getId() {
 		return id;
@@ -136,5 +139,13 @@ public class Review implements Serializable {
 
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
+	}
+
+	public ECommerceChannel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(ECommerceChannel channel) {
+		this.channel = channel;
 	}
 }

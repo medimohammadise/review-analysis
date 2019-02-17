@@ -1,6 +1,7 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.serviceimpl;
 
 import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
+import my.edu.um.fsktm.cra.amazonreviewcollector.enumeration.ECommerceChannel;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -85,6 +86,7 @@ public class AmazonReviewCollector {
                    // if (localReviewDate.is ) {
                         System.out.println("new review received");
                         reviews.add(new Review(
+                            ECommerceChannel.Amazon,
                             productID,
                             c.select("div[id^=customer_review]").attr("id").substring("customer_review-".length()),
                             c.select("div[id^=customer_review]").select("a[data-hook=review-title]").html(),
