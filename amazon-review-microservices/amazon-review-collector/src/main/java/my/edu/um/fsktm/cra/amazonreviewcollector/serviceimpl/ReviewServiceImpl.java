@@ -1,9 +1,9 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.serviceimpl;
 
-import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.query.N1qlQuery;
 import com.couchbase.client.java.query.N1qlQueryResult;
 import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
+import my.edu.um.fsktm.cra.amazonreviewcollector.enumeration.ECommerceChannel;
 import my.edu.um.fsktm.cra.amazonreviewcollector.repository.N1qlCouchbaseRepository;
 import my.edu.um.fsktm.cra.amazonreviewcollector.repository.ReviewRepository;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.ReviewService;
@@ -19,7 +19,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,10 +114,10 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public  List<InterviewAnalyticsDTO>  findAvarageSentimentByMonth() {
+    public  List<InterviewAnalyticsDTO>  findAvarageSentimentByMonth(ECommerceChannel channel) {
         List<InterviewAnalyticsDTO> jsonList=new ArrayList<>();
         N1qlQueryResult r5= n1qlCouchbaseRepository.getCouchbaseOperations().getCouchbaseBucket().query(N1qlQuery.simple("SELECT avg(sentiment) as sentiment,DATE_PART_STR(reviewDate,'year') as year,DATE_PART_STR(reviewDate,'month') as month  \n" +
-                "from review  where channel='Amazon' group by DATE_PART_STR(reviewDate,'year'),DATE_PART_STR(reviewDate,'month')\n" +
+                "from review  where channel='"+channel.name()+"' group by DATE_PART_STR(reviewDate,'year'),DATE_PART_STR(reviewDate,'month')\n" +
                 "order by year,month") );
         System.out.println("return count --->"+r5.allRows().size());
         r5.allRows().stream().forEach(row->{

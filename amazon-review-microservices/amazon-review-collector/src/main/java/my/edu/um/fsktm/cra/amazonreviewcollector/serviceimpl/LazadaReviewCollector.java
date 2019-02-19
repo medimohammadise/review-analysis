@@ -39,7 +39,7 @@ public class LazadaReviewCollector implements my.edu.um.fsktm.cra.amazonreviewco
             ArrayList<Map> lazadareviewItems = (ArrayList<Map>) lazadaResultMap.get("items");
             lazadareviewItems.forEach(item -> {
                 reviewList.add(new Review(ECommerceChannel.Lazada, productId, (item.get("buyerId") instanceof Long?Long.valueOf((Long)item.get("buyerId")).toString(): Integer.valueOf((Integer)item.get("buyerId")).toString())
-                        , (String)item.get("reviewTitle"), (String)item.get("buyerName"), (String)item.get("reviewContent"), (String)item.get("reviewDate"), 0));
+                        , (String)item.get("reviewTitle"), (String)item.get("buyerName"), (String)item.get("reviewContent"), (String)item.get("reviewTime"), 0));
             });
             Map pagingInfo = (Map) lazadaResultMap.get("paging");
             totalPages = (int) pagingInfo.get("totalPages");
