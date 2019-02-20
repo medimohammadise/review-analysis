@@ -27,7 +27,8 @@ public class ReviewResource {
     }
 
     @GetMapping("/review/average/{channel}")
-    public  List<InterviewAnalyticsDTO>  getAverageSentimentByMonth(@PathVariable ECommerceChannel channel){
+    public  List<InterviewAnalyticsDTO>  getAverageSentimentByMonth(@PathVariable List<ECommerceChannel> channel){
+        System.out.println(channel);
         return reviewService.findAvarageSentimentByMonth(channel);
     }
 

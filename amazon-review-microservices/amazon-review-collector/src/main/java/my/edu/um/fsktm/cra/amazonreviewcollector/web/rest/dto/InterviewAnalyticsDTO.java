@@ -1,6 +1,9 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.web.rest.dto;
 
+import my.edu.um.fsktm.cra.amazonreviewcollector.enumeration.ECommerceChannel;
+
 public class InterviewAnalyticsDTO {
+    private ECommerceChannel channel;
     private String sentiment;
     private String year;
     private String month;
@@ -24,14 +27,20 @@ public class InterviewAnalyticsDTO {
         this.month = month;
     }
 
-    public InterviewAnalyticsDTO(String seniment, String year, String month) {
+    public InterviewAnalyticsDTO(ECommerceChannel channel,String seniment, String year, String month) {
+        this.channel=channel;
         this.sentiment=seniment;
         this.year=year;
         this.month=month;
-
     }
 
+    public ECommerceChannel getChannel() {
+        return channel;
+    }
 
+    public void setChannel(ECommerceChannel channel) {
+        this.channel = channel;
+    }
 
     public String getSentiment() {
         return sentiment;

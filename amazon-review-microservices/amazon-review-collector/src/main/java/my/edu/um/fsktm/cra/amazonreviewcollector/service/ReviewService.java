@@ -15,6 +15,6 @@ public interface ReviewService {
 
     void saveReview(ReviewEvent analysedReview);
     void deleteAll();
-    List<InterviewAnalyticsDTO>   findAvarageSentimentByMonth(ECommerceChannel channel);
+    List<InterviewAnalyticsDTO>   findAvarageSentimentByMonth(List<ECommerceChannel> channel);
 }
 

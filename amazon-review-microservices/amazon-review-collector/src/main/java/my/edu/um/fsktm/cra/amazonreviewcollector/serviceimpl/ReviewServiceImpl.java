@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -114,15 +115,17 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public  List<InterviewAnalyticsDTO>  findAvarageSentimentByMonth(ECommerceChannel channel) {
+    public  List<InterviewAnalyticsDTO>  findAvarageSentimentByMonth(List<ECommerceChannel> channel) {
+	    List<String> channelList=channel.stream().map(item->"'"+item.name()+"'").collect(Collectors.toList());
+        System.out.println(channelList);
         List<InterviewAnalyticsDTO> jsonList=new ArrayList<>();
-        N1qlQueryResult r5= n1qlCouchbaseRepository.getCouchbaseOperations().getCouchbaseBucket().query(N1qlQuery.simple("SELECT avg(sentiment) as sentiment,DATE_PART_STR(reviewDate,'year') as year,DATE_PART_STR(reviewDate,'month') as month  \n" +
-                "from review  where channel='"+channel.name()+"' group by DATE_PART_STR(reviewDate,'year'),DATE_PART_STR(reviewDate,'month')\n" +
+        N1qlQueryResult r5= n1qlCouchbaseRepository.getCouchbaseOperations().getCouchbaseBucket().query(N1qlQuery.simple("SELECT avg(sentiment) as sentiment,DATE_PART_STR(reviewDate,'year') as year,DATE_PART_STR(reviewDate,'month') as month,channel  \n" +
+                "from review  where channel IN "+channelList+" group by DATE_PART_STR(reviewDate,'year'),DATE_PART_STR(reviewDate,'month'),channel\n" +
                 "order by year,month") );
         System.out.println("return count --->"+r5.allRows().size());
         r5.allRows().stream().forEach(row->{
            if (!row.value().isEmpty() && row.value().get("sentiment")!=null)
-            jsonList.add(new InterviewAnalyticsDTO(row.value().get("sentiment").toString(),row.value().get("year").toString(),row.value().get("month").toString()));
+            jsonList.add(new InterviewAnalyticsDTO(ECommerceChannel.valueOf(row.value().get("channel").toString()),row.value().get("sentiment").toString(),row.value().get("year").toString(),row.value().get("month").toString()));
 
         });
         return jsonList;
