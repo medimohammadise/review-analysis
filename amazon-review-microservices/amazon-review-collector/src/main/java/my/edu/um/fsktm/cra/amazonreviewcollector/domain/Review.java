@@ -7,6 +7,7 @@ import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.data.couchbase.core.mapping.id.GenerationStrategy.UNIQUE;
@@ -18,6 +19,43 @@ import static org.springframework.data.couchbase.core.mapping.id.GenerationStrat
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
+	@Id @GeneratedValue(strategy = UNIQUE)
+	@Field
+	private String id;
+
+
+	@Field
+	private String productId;
+
+	@Field
+	private String title;
+
+
+	@Field
+	private String author;
+
+	@Field
+	private String reviewText;
+
+	private String  reviewContent;
+
+	@Field
+	private String customerProfileId;
+
+	@Field
+	private String reviewDate;
+
+	@Field
+	private Double sentiment;
+
+	@Field
+	private ECommerceChannel channel;
+
+
+
+	@Field
+	private List<String> postTags;
+
 	public Review(){
 
 	}
@@ -33,37 +71,7 @@ public class Review implements Serializable {
     	  this.productId=productId;
     	  this.sentiment=sentiment;
     }
-    @Id @GeneratedValue(strategy = UNIQUE)
-    @Field
-    private String id;
-    
 
-    @Field
-    private String productId;
-    
-    @Field
-    private String title;
-    
-    
-    @Field
-    private String author;
-    
-    @Field
-    private String reviewText;
-
-	private String  reviewContent;
-
-    @Field
-    private String customerProfileId;
-    
-    @Field
-    private String reviewDate;
-
-	@Field
-	private Double sentiment;
-
-	@Field
-	private ECommerceChannel channel;
 
 	public String getId() {
 		return id;
@@ -147,5 +155,12 @@ public class Review implements Serializable {
 
 	public void setChannel(ECommerceChannel channel) {
 		this.channel = channel;
+	}
+	public List<String> getPostTags() {
+		return postTags;
+	}
+
+	public void setPostTags(List<String> postTags) {
+		this.postTags = postTags;
 	}
 }

@@ -28,7 +28,7 @@ public class CosnumerService {
 
 	@StreamListener(ConsumerChannel.REVIEW_ANALYSIS_RESULT_CHANNEL)
 	public void consumeAnalysisREsult(ReviewEvent analysedReview) {
-		log.info("Received message: {}.", analysedReview.getReviewId());
+		log.info("Received message: {}.", analysedReview.getReviewId()+"with pos tags : "+analysedReview );
 		reviewService.saveReview(analysedReview);
 	}
 	   /*@StreamListener(ConsumerChannel.CHANNEL)

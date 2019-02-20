@@ -4,9 +4,11 @@ import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
 import my.edu.um.fsktm.cra.amazonreviewcollector.enumeration.ECommerceChannel;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging.ReviewEvent;
 import my.edu.um.fsktm.cra.amazonreviewcollector.web.rest.dto.InterviewAnalyticsDTO;
+import my.edu.um.fsktm.cra.amazonreviewcollector.web.rest.dto.WordCountDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface ReviewService {
     public void extractAndsaveReview(String productId,String channelURL, LocalDateTime reviewStartDate);
@@ -16,5 +18,8 @@ public interface ReviewService {
     void saveReview(ReviewEvent analysedReview);
     void deleteAll();
     List<InterviewAnalyticsDTO>   findAvarageSentimentByMonth(List<ECommerceChannel> channel);
+
+    void republishAllReviesForSetimentAnalyss();
+    List<WordCountDTO> getWrdCount();
 }
 

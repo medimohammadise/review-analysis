@@ -1,5 +1,6 @@
 package my.edu.um.fsktm.cra.amazonreviewcollector.serviceimpl;
 
+import com.couchbase.client.java.document.json.JsonArray;
 import com.couchbase.client.java.query.N1qlQuery;
 import com.couchbase.client.java.query.N1qlQueryResult;
 import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
@@ -10,6 +11,7 @@ import my.edu.um.fsktm.cra.amazonreviewcollector.service.ReviewService;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging.NewReviewCollectedEvent;
 import my.edu.um.fsktm.cra.amazonreviewcollector.service.messaging.ReviewEvent;
 import my.edu.um.fsktm.cra.amazonreviewcollector.web.rest.dto.InterviewAnalyticsDTO;
+import my.edu.um.fsktm.cra.amazonreviewcollector.web.rest.dto.WordCountDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,9 +22,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -107,6 +107,7 @@ public class ReviewServiceImpl implements ReviewService{
         Optional<Review> review=reviewRepository.findById(analysedReview.getReviewId());
         if (review.isPresent())
             review.get().setSentiment(analysedReview.getSentiment());
+            review.get().setPostTags(analysedReview.getPosTagList());
             reviewRepository.save(review.get());
     }
 
@@ -129,5 +130,50 @@ public class ReviewServiceImpl implements ReviewService{
 
         });
         return jsonList;
+    }
+
+    public List<WordCountDTO>  getWrdCount() {
+        List<WordCountDTO> wordlCountList=new ArrayList<>();
+        Map<String, Integer> counts=new HashMap<String, Integer>();;
+        List<String> wordArray;
+        N1qlQueryResult r5= n1qlCouchbaseRepository.getCouchbaseOperations().getCouchbaseBucket().query(N1qlQuery.simple("SELECT productId, ARRAY_FLATTEN (words, 1) as posTags  \n"+
+        "from(SELECT p.productId AS productId, ARRAY_AGG(p.postTags)AS words  \n"+
+                "FROM review p where p.postTags is not null  \n"+
+        "GROUP BY p.productId)aggregatedPosTags;  \n"));
+        System.out.println("return count --->"+r5.allRows().size());
+        r5.allRows().stream().forEach(row->{
+            if (!row.value().isEmpty() && row.value().get("productId")!=null) {
+                JsonArray posTagList=(JsonArray)row.value().get("posTags");
+                ArrayList<String> dataList = new ArrayList<String>();
+                for(Object obj : posTagList){
+                    dataList.add((String)obj);
+                }
+
+                for (String str : dataList) {
+                    if (dataList.contains(str) && counts.get(str)!=null) {
+                        counts.put(str, counts.get(str) + 1);
+                    } else {
+                        counts.put(str, 1);
+                    }
+                }
+
+                //System.out.println(row.value().getNames());
+                //System.out.println( dataList.stream().filter(posTag->dataList.indexOf(posTag)!=dataList.lastIndexOf(posTag)).count().collect(Collectors.toList()));
+            }
+        });
+        counts.entrySet().forEach(entry->{
+            wordlCountList.add(new WordCountDTO(entry.getKey(),entry.getValue()));
+        });
+        return wordlCountList;
+    }
+
+    @Override
+    public void republishAllReviesForSetimentAnalyss() {
+        List<Review> reviews= reviewRepository.findAll();
+
+        reviews.forEach(review->{
+            publishCollectedReview(review);
+        });
+
     }
 }

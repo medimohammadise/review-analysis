@@ -33,6 +33,7 @@ public class CosnumerService {
 	    public void consume(Review review) {
 	        log.info("Received message in sentiment microservice: {}.", review.getId());
 	        double sentiment=sentimentService.sentiment(review.getReviewText());
+			review.setPosTags(sentimentService.findPOSTaggerInText(review.getReviewText()));
 	        review.setSentiment(sentiment);
 			sentimentMessagePublisherService.sendMessage(review);
 

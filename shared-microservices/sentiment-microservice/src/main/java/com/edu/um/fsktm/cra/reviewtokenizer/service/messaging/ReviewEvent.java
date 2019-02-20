@@ -1,18 +1,21 @@
 package com.edu.um.fsktm.cra.reviewtokenizer.service.messaging;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ReviewEvent {
-	public String reviewId;
-    public LocalDate eventDate;
-    public double sentiment ;
+	private String reviewId;
+    private LocalDate eventDate;
+    private double sentiment ;
+    private List<String> posTagList;
     public ReviewEvent(){
 
     }
-    public ReviewEvent(LocalDate eventDate, String reviewId, double sentiment) {
+    public ReviewEvent(LocalDate eventDate, String reviewId, double sentiment,List<String> posTagList) {
         this.reviewId = reviewId;
         this.eventDate = eventDate;
         this.sentiment = sentiment;
+        this.posTagList=posTagList;
     }
 
     public String getReviewId() {
@@ -38,5 +41,13 @@ public class ReviewEvent {
 
     public void setSentiment(double sentiment) {
         this.sentiment = sentiment;
+    }
+
+    public List<String> getPosTagList() {
+        return posTagList;
+    }
+
+    public void setPosTagList(List<String> posTagList) {
+        this.posTagList = posTagList;
     }
 }

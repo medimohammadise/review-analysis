@@ -6,12 +6,43 @@ import org.springframework.data.couchbase.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public Review(){
+	private String id;
+
+
+	private String productId;
+
+
+	private String title;
+
+
+
+	private String author;
+
+
+	private String reviewText;
+
+	private String customerProfileId;
+
+
+	private String reviewDate;
+	private double sentiment;
+	private List<String> posTags;
+
+	public List<String> getPosTags() {
+		return posTags;
+	}
+
+	public void setPosTags(List<String> posTags) {
+		this.posTags = posTags;
+	}
+
+	public Review(){
 
     }
     public Review(String id, String productId, String customerProfileId, String title, String author, String reviewText, String reviewDate) {
@@ -24,26 +55,6 @@ public class Review implements Serializable {
     	  this.productId=productId;
     }
 
-    private String id;
-    
-
-    private String productId;
-    
-
-    private String title;
-    
-    
-
-    private String author;
-    
-
-    private String reviewText;
-
-    private String customerProfileId;
-    
-
-    private String reviewDate;
-    private double sentiment;
 
 	public String getId() {
 		return id;
