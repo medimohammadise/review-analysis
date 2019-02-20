@@ -3,6 +3,7 @@ package my.edu.um.fsktm.cra.amazonreviewcollector.serviceimpl;
 import my.edu.um.fsktm.cra.amazonreviewcollector.enumeration.ECommerceChannel;
 import my.edu.um.fsktm.cra.amazonreviewcollector.domain.Review;
 import my.edu.um.fsktm.cra.amazonreviewcollector.repository.ReviewRepository;
+import my.edu.um.fsktm.cra.amazonreviewcollector.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,7 +40,7 @@ public class LazadaReviewCollector implements my.edu.um.fsktm.cra.amazonreviewco
             ArrayList<Map> lazadareviewItems = (ArrayList<Map>) lazadaResultMap.get("items");
             lazadareviewItems.forEach(item -> {
                 reviewList.add(new Review(ECommerceChannel.Lazada, productId, (item.get("buyerId") instanceof Long?Long.valueOf((Long)item.get("buyerId")).toString(): Integer.valueOf((Integer)item.get("buyerId")).toString())
-                        , (String)item.get("reviewTitle"), (String)item.get("buyerName"), (String)item.get("reviewContent"), (String)item.get("reviewTime"), 0));
+                        , (String)item.get("reviewTitle"), (String)item.get("buyerName"), (String)item.get("reviewContent"), StringUtils.convertToDate((String)item.get("reviewTime")), 0));
             });
             Map pagingInfo = (Map) lazadaResultMap.get("paging");
             totalPages = (int) pagingInfo.get("totalPages");
